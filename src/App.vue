@@ -1,8 +1,13 @@
 <template>
-    <div class="font-bold center w-fit text-3xl">Hello world</div>
+    <defaultLayout>
+        <RouterView></RouterView>
+    </defaultLayout>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import defaultLayout from "@/layout/default-layout.vue";
+
+</script>
 
 <style lang="scss">
 @import './styles/common.scss';

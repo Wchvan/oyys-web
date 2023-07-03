@@ -64,23 +64,28 @@ body{
 }
 
 @font-face {
+  font-family: "XS";
+  src: url('@/assets/font/TTXS.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "FZ";
   src: url('@/assets/font/fz.ttf');
   font-weight: normal;
   font-style: normal;
 }
 
-@font-face {
-  font-family: "XK";
-  src: url('@/assets/font/XK.ttf');
-  font-weight: normal;
-  font-style: normal;
+
+.font-xs{
+  font-family: "XS";
 }
 
 .font-fz{
   font-family: "FZ";
 }
 
-.font-xk{
-  font-family: "XK";
+.font-white{
+  color: #fff;
 }
