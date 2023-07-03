@@ -1,11 +1,7 @@
 <template>
-<div class="font-bold center w-fit text-3xl">历史订单</div>
+    <div class="font-bold center w-fit text-3xl">历史订单</div>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts"></script>
 
-</script>
-
-<style lang='scss' scoped>
-
-</style>
+<style lang="scss" scoped></style>

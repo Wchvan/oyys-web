@@ -1,6 +1,6 @@
 <template>
     <el-container class="layout">
-        <el-header class=" p-0">
+        <el-header class="p-0">
             <top-nav></top-nav>
         </el-header>
         <el-container class="w-full h-full">
@@ -14,13 +14,13 @@
     </el-container>
 </template>
 
-<script setup lang='ts'>
-import topNav from '@/components/top-nav.vue'
+<script setup lang="ts">
+import topNav from '@/components/top-nav.vue';
 import leftNav from '@/components/left-nav.vue';
 </script>
 
-<style lang='scss' scoped>
-.layout{
+<style lang="scss" scoped>
+.layout {
     width: 100%;
     height: 100%;
 }
