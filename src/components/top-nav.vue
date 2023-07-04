@@ -3,7 +3,7 @@
         class="border-b-2 border-gray-400 flex flex-row justify-start h-full"
         style="background-color: #95b4ca"
     >
-    <div
+        <div
             class="flex flex-row py-1 flex-2 ml-2"
             style="cursor: pointer"
             @click="$router.push('/')"
@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import logoSrc from '@/assets/favicon.png'
+import logoSrc from '@/assets/favicon.png';
 </script>
 
 <style lang="scss" scoped></style>
