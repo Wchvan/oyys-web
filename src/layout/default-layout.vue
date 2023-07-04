@@ -7,7 +7,7 @@
             <el-aside class="h-full w-56">
                 <left-nav></left-nav>
             </el-aside>
-            <el-main>
+            <el-main class="p-0">
                 <slot></slot>
             </el-main>
         </el-container>

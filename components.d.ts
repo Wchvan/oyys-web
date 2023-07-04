@@ -8,14 +8,21 @@ export {}
 declare module 'vue' {
     export interface GlobalComponents {
         ElAside: typeof import('element-plus/es')['ElAside'];
+        ElButton: typeof import('element-plus/es')['ElButton'];
+        ElCard: typeof import('element-plus/es')['ElCard'];
         ElContainer: typeof import('element-plus/es')['ElContainer'];
         ElHeader: typeof import('element-plus/es')['ElHeader'];
+        ElInput: typeof import('element-plus/es')['ElInput'];
         ElMain: typeof import('element-plus/es')['ElMain'];
         ElMenu: typeof import('element-plus/es')['ElMenu'];
         ElMenuItem: typeof import('element-plus/es')['ElMenuItem'];
+        ElPagination: typeof import('element-plus/es')['ElPagination'];
         ElSubMenu: typeof import('element-plus/es')['ElSubMenu'];
+        ElTable: typeof import('element-plus/es')['ElTable'];
+        ElTableColumn: typeof import('element-plus/es')['ElTableColumn'];
         IEpAvatar: typeof import('~icons/ep/avatar')['default'];
         IEpHouse: typeof import('~icons/ep/house')['default'];
+        IEpSearch: typeof import('~icons/ep/search')['default'];
         IEpStopwatch: typeof import('~icons/ep/stopwatch')['default'];
         IEpTickets: typeof import('~icons/ep/tickets')['default'];
         LeftNav: typeof import('./src/components/left-nav.vue')['default'];

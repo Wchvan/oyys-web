@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import type { InternalAxiosRequestConfig, AxiosResponse } from 'axios';
+import { ElMessage } from 'element-plus';
 
 const baseURL =
     process.env.NODE_ENV == 'development' ? '/api' : 'https://api.revocat.tech';
@@ -28,6 +29,20 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
     (response: AxiosResponse) => {
         // 对响应数据做点什么
+        console.log(response);
+        if (response.status !== 200) {
+            ElMessage({
+                type: 'error',
+                message: '网络请求错误',
+            });
+        } else {
+            if (response.data.code !== 200) {
+                ElMessage({
+                    type: 'error',
+                    message: response.data.msg,
+                });
+            }
+        }
         return response;
     },
     (error: any) => {
