@@ -7,7 +7,7 @@
             <el-aside class="h-full w-56">
                 <left-nav></left-nav>
             </el-aside>
-            <el-main class="p-0">
+            <el-main class="p-0 bg-all">
                 <slot></slot>
             </el-main>
         </el-container>
@@ -24,4 +24,5 @@ import leftNav from '@/components/left-nav.vue';
     width: 100%;
     height: 100%;
 }
+
 </style>

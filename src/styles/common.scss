@@ -77,6 +77,16 @@ body{
   font-style: normal;
 }
 
+@font-face {
+  font-family: "XK";
+  src: url('@/assets/font/XK.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-xk{
+  font-family: "XK";
+}
 
 .font-xs{
   font-family: "XS";
