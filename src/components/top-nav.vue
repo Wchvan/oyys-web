@@ -29,16 +29,19 @@
         >
             <div class="self-center">
                 <el-dropdown>
-                    <span class="self-center mr-2 text-2xl font-fz navTitle" style="color: #fff">
-                    Admin
-                    <el-icon class="el-icon--right">
-                        <arrow-down />
-                    </el-icon>
+                    <span
+                        class="self-center mr-2 text-2xl font-fz navTitle"
+                        style="color: #fff"
+                    >
+                        Admin
+                        <el-icon class="el-icon--right">
+                            <arrow-down />
+                        </el-icon>
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item @click="logOut">
-                                <span class=" text-lg">退出登录</span>
+                                <span class="text-lg">退出登录</span>
                             </el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
@@ -51,13 +54,13 @@
 <script setup lang="ts">
 import logoSrc from '@/assets/favicon.png';
 import { ArrowDown } from '@element-plus/icons-vue';
-import useAdminStore from '@/store/admin/admin'
+import useAdminStore from '@/store/admin/admin';
 
-const adminStore = useAdminStore()
+const adminStore = useAdminStore();
 
 const logOut = async () => {
-    adminStore.logOut({token: adminStore.token})
-}
+    adminStore.logOut({ token: adminStore.token });
+};
 </script>
 
 <style lang="scss" scoped></style>

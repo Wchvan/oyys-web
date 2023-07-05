@@ -121,9 +121,12 @@ const changePath = (index: string) => {
     sessionStorage.setItem('index', activeIndex.value);
 };
 
-watch(() => route.path, (newVal)=>{
-    activeIndex.value = newVal
-})
+watch(
+    () => route.path,
+    (newVal) => {
+        activeIndex.value = newVal;
+    },
+);
 </script>
 
 <style lang="scss" scoped></style>
