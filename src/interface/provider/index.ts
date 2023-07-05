@@ -6,3 +6,13 @@ export type providerType = {
     name: string;
     phone: string;
 };
+
+export type comboType = {
+    description: string;
+    flavor: string;
+    id: number;
+    image: string[];
+    supplierName: string;
+    weight: string;
+    name: string;
+};

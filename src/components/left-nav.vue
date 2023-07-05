@@ -110,7 +110,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 const route = useRoute();
 
@@ -120,6 +120,10 @@ const changePath = (index: string) => {
     activeIndex.value = index;
     sessionStorage.setItem('index', activeIndex.value);
 };
+
+watch(() => route.path, (newVal)=>{
+    activeIndex.value = newVal
+})
 </script>
 
 <style lang="scss" scoped></style>

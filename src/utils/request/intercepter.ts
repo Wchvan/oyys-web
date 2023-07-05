@@ -1,3 +1,4 @@
+import useAdminStore from '@/store/admin/admin';
 import axios, { AxiosInstance } from 'axios';
 import type { InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 import { ElMessage } from 'element-plus';
@@ -29,7 +30,6 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
     (response: AxiosResponse) => {
         // 对响应数据做点什么
-        console.log(response);
         if (response.status !== 200) {
             ElMessage({
                 type: 'error',
@@ -41,6 +41,8 @@ axiosInstance.interceptors.response.use(
                     type: 'error',
                     message: response.data.msg,
                 });
+            } else if (response.headers?.token) {
+                useAdminStore().token = response.headers?.token;
             }
         }
         return response;

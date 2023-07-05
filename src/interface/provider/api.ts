@@ -18,3 +18,23 @@ export type getProvidersResp = apiRes<{
         phone: string;
     }[];
 }>;
+
+export type getCombosParm = {
+    name?: string;
+    supplierId?: number;
+    page: number;
+    pageSize: number;
+};
+
+export type getCombosResp = apiRes<{
+    total: number;
+    setArr: {
+        description: string;
+        flavor: string;
+        id: number;
+        image: string[];
+        supplierName: string;
+        weight: string;
+        name: string;
+    }[];
+}>;

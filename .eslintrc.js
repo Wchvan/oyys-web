@@ -22,5 +22,6 @@ module.exports = {
         '@typescript-eslint/no-explicit-any': ['off'],
         'vue/multi-word-component-names': 'off',
         'vue/valid-v-slot': 'off',
+        'vue/valid-v-model': 'off',
     },
 };
