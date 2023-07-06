@@ -12,7 +12,7 @@
             size="large"
             row-key="date"
             header-row-class-name="text-xl font-bold text-center"
-            row-class-name="text-lg font-semibold"
+            row-class-name="text-lg font-semibold cursor-pointer"
             @row-click="showProviderDetail"
         >
             <el-table-column
@@ -33,17 +33,17 @@
                 </template>
             </el-table-column>
         </el-table>
-        <el-pagination
+        <!-- <el-pagination
             background
             layout="prev, pager, next"
             :total="total"
             class="center-x w-fit mt-4"
             @current-change="handlePageChange"
-        />
+        /> -->
         <div class="flex justify-end">
             <el-button
                 type="success"
-                class="w-52"
+                class="w-52 mt-3"
                 size="large"
                 round
                 @click="createDailyCombo"
@@ -52,16 +52,19 @@
         </div>
     </el-card>
     <combo-detail :visible="detailVisible" :data="detailData"></combo-detail>
+    <combo-res :visible="resVisible" :data="resData"></combo-res>
 </template>
 
 <script setup lang="ts">
 import ProviderService from '@/api/provider/provider';
-import { comboType } from '@/interface/provider';
+import { comboType, resDataType } from '@/interface/provider';
 import { getCombosParm } from '@/interface/provider/api';
+import useAdminStore from '@/store/admin/admin';
+import { getEndDay } from '@/utils/day/day';
 import { ElMessage } from 'element-plus';
-import { el } from 'element-plus/es/locale';
 import { ref, watch } from 'vue';
 import comboDetail from './combo-detail.vue';
+import comboRes from './combo-res.vue'
 
 const props = defineProps<{
     id: number;
@@ -170,10 +173,38 @@ const createDailyCombo = async () => {
         if (res.code === 200) {
             ElMessage({
                 type: 'success',
-                message: '已生成',
+                message: '已生成当日套餐',
             });
+            const res = await ProviderService.getQRCode()
+            if (res.code === 200) {
+                resDialog(res.data)
+            }
         }
     }
+};
+
+/* 生成成功的对话框 */
+const resVisible = ref<boolean>(false);
+const resData = ref<resDataType>({
+    provider: providerName.value,
+    date: '',
+    manager: useAdminStore().userName,
+    url: '',
+    QR: ''
+});
+
+const resDialog = (data: {url:string, QR: string}) => {
+    resData.value = {
+        provider: providerName.value,
+        date: getEndDay(),
+        manager: useAdminStore().userName,
+        url: data.url,
+        QR: data.QR
+    }
+    resVisible.value = false
+    setTimeout(() => {
+        resVisible.value = true
+    })
 };
 </script>
 

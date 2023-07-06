@@ -27,7 +27,7 @@
             size="large"
             row-key="date"
             header-row-class-name="text-xl font-bold text-center"
-            row-class-name="text-lg font-semibold"
+            row-class-name="text-lg font-semibold cursor-pointer"
             @row-click="showProviderDetail"
         >
             <el-table-column
@@ -54,6 +54,7 @@
             :total="total"
             class="center-x w-fit mt-2"
             @current-change="handlePageChange"
+            :current-page="page"
         />
     </el-card>
     <provider-dialog
@@ -68,6 +69,7 @@ import type { providerType } from '@/interface/provider/index';
 import useProviderStore from '@/store/provider/provider';
 import { getProvidersParm } from '@/interface/provider/api';
 import providerDialog from './provider-dialog.vue';
+import { pa } from 'element-plus/es/locale';
 
 const emit = defineEmits<{
     (e: 'enterPick', id: number, name: string): void;
@@ -76,6 +78,7 @@ const emit = defineEmits<{
 const providerStore = useProviderStore();
 const pageSize = ref<number>(8);
 const total = ref<number>(0);
+const page = ref<number>(1)
 
 /* 搜索相关 */
 const inputVal = ref<string>('');
@@ -83,9 +86,10 @@ const inputVal = ref<string>('');
 const searchProvider = () => {
     getProviders({
         name: inputVal.value,
-        page: 0,
+        page: 1,
         pageSize: pageSize.value,
     });
+    page.value = 1
 };
 
 const handleClick = (index: number) => {
@@ -108,12 +112,13 @@ const tableLabels = ref<Partial<Record<keyof providerType, string>>>({
 });
 
 getProviders({
-    page: 0,
+    page: 1,
     pageSize: pageSize.value,
 });
 
 /* 页码改变相关 */
 const handlePageChange = (value: number) => {
+    page.value = value
     getProviders({
         name: inputVal.value,
         page: value,

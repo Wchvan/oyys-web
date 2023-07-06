@@ -6,6 +6,7 @@ import {
     getCombosResp,
     getProvidersParm,
     getProvidersResp,
+    getQRCodeResp,
 } from '@/interface/provider/api';
 
 /* 获取所有供应商基本信息 */
@@ -26,10 +27,17 @@ const createDailyCombo = async (params: createDailyComboParm) => {
     return res;
 };
 
+/* 获取当天套餐的url */
+const getQRCode = async () => {
+    const res = (await get('/manager/list')) as getQRCodeResp;
+    return res;
+};
+
 class ProviderService {
     static getProviders = getProviders;
     static getCombos = getCombos;
     static createDailyCombo = createDailyCombo;
+    static getQRCode = getQRCode;
 }
 
 export default ProviderService;

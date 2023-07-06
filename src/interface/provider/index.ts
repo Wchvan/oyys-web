@@ -16,3 +16,11 @@ export type comboType = {
     weight: string;
     name: string;
 };
+
+export type resDataType = {
+    provider: string;
+    date: string;
+    url: string;
+    manager: string;
+    QR: string;
+};

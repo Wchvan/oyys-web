@@ -44,3 +44,8 @@ export type createDailyComboParm = {
 };
 
 export type createDailyComboResp = apiRes<null>;
+
+export type getQRCodeResp = apiRes<{
+    QR: string;
+    url: string;
+}>;
