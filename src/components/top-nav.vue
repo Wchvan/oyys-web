@@ -40,7 +40,7 @@
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item @click="logOut">
+                            <el-dropdown-item @click="logout">
                                 <span class="text-lg">退出登录</span>
                             </el-dropdown-item>
                         </el-dropdown-menu>
@@ -58,8 +58,8 @@ import useAdminStore from '@/store/admin/admin';
 
 const adminStore = useAdminStore();
 
-const logOut = async () => {
-    adminStore.logOut({ token: adminStore.token });
+const logout = async () => {
+    adminStore.logout({ token: adminStore.token });
 };
 </script>
 

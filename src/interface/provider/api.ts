@@ -38,3 +38,9 @@ export type getCombosResp = apiRes<{
         name: string;
     }[];
 }>;
+
+export type createDailyComboParm = {
+    setInfo: number[];
+};
+
+export type createDailyComboResp = apiRes<null>;

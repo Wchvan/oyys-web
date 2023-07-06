@@ -1,24 +1,24 @@
 import {
-    logInParm,
-    logInResp,
-    logOutParm,
-    logOutResp,
+    loginParm,
+    loginResp,
+    logoutParm,
+    logoutResp,
 } from '@/interface/admin/api';
 import { post } from '@/utils/request';
 
-const logIn = async (params: logInParm) => {
-    const res = (await post('/manager/login', params)) as logInResp;
+const login = async (params: loginParm) => {
+    const res = (await post('/manager/login', params)) as loginResp;
     return res;
 };
 
-const logOut = async (params: logOutParm) => {
-    const res = (await post('/manager/logout', params)) as logOutResp;
+const logout = async (params: logoutParm) => {
+    const res = (await post('/manager/logout', params)) as logoutResp;
     return res;
 };
 
 class AdminServer {
-    static logOut = logOut;
-    static logIn = logIn;
+    static logout = logout;
+    static login = login;
 }
 
 export default AdminServer;

@@ -1,7 +1,8 @@
 <template>
-    <defaultLayout>
+    <defaultLayout v-if="!$route.meta.avoidAuth">
         <RouterView></RouterView>
     </defaultLayout>
+    <RouterView v-else></RouterView>
 </template>
 
 <script setup lang="ts">

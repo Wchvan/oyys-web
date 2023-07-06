@@ -28,6 +28,7 @@
             row-key="date"
             header-row-class-name="text-xl font-bold text-center"
             row-class-name="text-lg font-semibold"
+            @row-click="showProviderDetail"
         >
             <el-table-column
                 v-for="(item, index) in tableLabels"
@@ -55,6 +56,7 @@
             @current-change="handlePageChange"
         />
     </el-card>
+    <provider-dialog :visible="detailVisible" :data="detailData"></provider-dialog>
 </template>
 
 <script setup lang="ts">
@@ -62,6 +64,7 @@ import { ref } from 'vue';
 import type { providerType } from '@/interface/provider/index';
 import useProviderStore from '@/store/provider/provider';
 import { getProvidersParm } from '@/interface/provider/api';
+import providerDialog from './provider-dialog.vue';
 
 const emit = defineEmits<{
     (e: 'enterPick', id: number, name: string): void;
@@ -114,6 +117,27 @@ const handlePageChange = (value: number) => {
         pageSize: pageSize.value,
     });
 };
+
+/* 对话框显示详情 */
+const detailVisible = ref<boolean>(false)
+const detailData = ref<providerType>({
+    address: '',
+    avatar: [],
+    id: 0,
+    manager: '',
+    name: '',
+    phone: '',
+})
+
+const showProviderDetail = (row: providerType) => {
+    detailVisible.value = false
+    detailData.value = row
+    setTimeout( ()=> {
+        detailVisible.value =true
+        console.log(detailVisible.value)
+    })
+}
+
 </script>
 
 <style lang="scss" scoped></style>

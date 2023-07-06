@@ -1,14 +1,14 @@
 import { apiRes } from '../type';
 
-export type logInParm = {
+export type loginParm = {
     username: string;
     password: string;
 };
 
-export type logInResp = apiRes<null>;
+export type loginResp = apiRes<null>;
 
-export type logOutParm = {
+export type logoutParm = {
     token: string;
 };
 
-export type logOutResp = apiRes<null>;
+export type logoutResp = apiRes<null>;

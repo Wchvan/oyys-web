@@ -1,9 +1,9 @@
 import AdminServer from '@/api/admin/admin';
 import {
-    logInParm,
-    logInResp,
-    logOutParm,
-    logOutResp,
+    loginParm,
+    loginResp,
+    logoutParm,
+    logoutResp,
 } from '@/interface/admin/api';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
@@ -19,8 +19,8 @@ const useAdminStore = defineStore(
             token.value = '';
         };
 
-        const logIn = async (params: logInParm) => {
-            const res = (await AdminServer.logIn(params)) as logInResp;
+        const login = async (params: loginParm) => {
+            const res = (await AdminServer.login(params)) as loginResp;
 
             if (res.code === 200) {
                 userName.value = params.username;
@@ -29,8 +29,8 @@ const useAdminStore = defineStore(
             return res;
         };
 
-        const logOut = async (params: logOutParm) => {
-            const res = (await AdminServer.logOut(params)) as logOutResp;
+        const logout = async (params: logoutParm) => {
+            const res = (await AdminServer.logout(params)) as logoutResp;
             init();
             return res;
         };
@@ -38,8 +38,8 @@ const useAdminStore = defineStore(
         return {
             userName,
             token,
-            logOut,
-            logIn,
+            logout,
+            login,
         };
     },
     {
