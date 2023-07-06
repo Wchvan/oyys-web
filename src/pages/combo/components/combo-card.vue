@@ -64,7 +64,7 @@ import { getEndDay } from '@/utils/day/day';
 import { ElMessage } from 'element-plus';
 import { ref, watch } from 'vue';
 import comboDetail from './combo-detail.vue';
-import comboRes from './combo-res.vue'
+import comboRes from './combo-res.vue';
 
 const props = defineProps<{
     id: number;
@@ -175,9 +175,9 @@ const createDailyCombo = async () => {
                 type: 'success',
                 message: '已生成当日套餐',
             });
-            const res = await ProviderService.getQRCode()
+            const res = await ProviderService.getQRCode();
             if (res.code === 200) {
-                resDialog(res.data)
+                resDialog(res.data);
             }
         }
     }
@@ -190,21 +190,21 @@ const resData = ref<resDataType>({
     date: '',
     manager: useAdminStore().userName,
     url: '',
-    QR: ''
+    QR: '',
 });
 
-const resDialog = (data: {url:string, QR: string}) => {
+const resDialog = (data: { url: string; QR: string }) => {
     resData.value = {
         provider: providerName.value,
         date: getEndDay(),
         manager: useAdminStore().userName,
         url: data.url,
-        QR: data.QR
-    }
-    resVisible.value = false
+        QR: data.QR,
+    };
+    resVisible.value = false;
     setTimeout(() => {
-        resVisible.value = true
-    })
+        resVisible.value = true;
+    });
 };
 </script>
 

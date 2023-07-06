@@ -53,8 +53,8 @@
             layout="prev, pager, next"
             :total="total"
             class="center-x w-fit mt-2"
-            @current-change="handlePageChange"
             :current-page="page"
+            @current-change="handlePageChange"
         />
     </el-card>
     <provider-dialog
@@ -78,7 +78,7 @@ const emit = defineEmits<{
 const providerStore = useProviderStore();
 const pageSize = ref<number>(8);
 const total = ref<number>(0);
-const page = ref<number>(1)
+const page = ref<number>(1);
 
 /* 搜索相关 */
 const inputVal = ref<string>('');
@@ -89,7 +89,7 @@ const searchProvider = () => {
         page: 1,
         pageSize: pageSize.value,
     });
-    page.value = 1
+    page.value = 1;
 };
 
 const handleClick = (index: number) => {
@@ -118,7 +118,7 @@ getProviders({
 
 /* 页码改变相关 */
 const handlePageChange = (value: number) => {
-    page.value = value
+    page.value = value;
     getProviders({
         name: inputVal.value,
         page: value,

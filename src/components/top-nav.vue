@@ -22,10 +22,7 @@
                 </span>
             </div>
         </div>
-        <div
-            class="flex flex-row py-1 flex-2 ml-2"
-            style="cursor: pointer"
-        >
+        <div class="flex flex-row py-1 flex-2 ml-2" style="cursor: pointer">
             <div class="self-center">
                 <el-dropdown>
                     <span
@@ -56,12 +53,12 @@ import { ArrowDown } from '@element-plus/icons-vue';
 import useAdminStore from '@/store/admin/admin';
 import { useRouter } from 'vue-router';
 
-const router = useRouter()
+const router = useRouter();
 const adminStore = useAdminStore();
 
 const logout = async () => {
     adminStore.logout({ token: adminStore.token });
-    router.push('/login')
+    router.push('/login');
 };
 </script>
 

@@ -1,5 +1,11 @@
 <template>
-    <el-dialog v-model="centerDialogVisible" width="50%" top="10%" center destroy-on-close>
+    <el-dialog
+        v-model="centerDialogVisible"
+        width="50%"
+        top="10%"
+        center
+        destroy-on-close
+    >
         <el-card class="box-card">
             <template #header>
                 <div class="text-center text-2xl font-semibold">
@@ -8,10 +14,14 @@
             </template>
             <el-container>
                 <el-aside width="50%">
-                    <img :src="resData.QR" class=" w-36 h-36 center"/>
+                    <img :src="resData.QR" class="w-36 h-36 center" />
                 </el-aside>
-                <el-main >
-                    <div v-for="(item, key, index) in dataLabels" :key="index" class="text-lg py-2 flex flex-row w-full">
+                <el-main>
+                    <div
+                        v-for="(item, key, index) in dataLabels"
+                        :key="index"
+                        class="text-lg py-2 flex flex-row w-full"
+                    >
                         <div class="w-1/4 mx-3">{{ item }}:</div>
                         <span>{{ resData[key] }}</span>
                     </div>
@@ -19,7 +29,14 @@
             </el-container>
         </el-card>
         <template #footer>
-            <el-button class=" w-1/4" @click="centerDialogVisible = false" type="primary" size="large" round>确认</el-button>
+            <el-button
+                class="w-1/4"
+                type="primary"
+                size="large"
+                round
+                @click="centerDialogVisible = false"
+                >确认</el-button
+            >
         </template>
     </el-dialog>
 </template>
@@ -49,7 +66,7 @@ const dataLabels = ref<Partial<Record<keyof resDataType, string>>>({
     provider: '供应商',
     date: '截止日期',
     url: '网页链接',
-    manager: '负责人'
+    manager: '负责人',
 });
 </script>
 
