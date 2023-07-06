@@ -41,10 +41,17 @@
             @current-change="handlePageChange"
         />
         <div class="flex justify-end">
-            <el-button type="success" class=" w-52" size="large" round @click="createDailyCombo">提交并生成</el-button>
+            <el-button
+                type="success"
+                class="w-52"
+                size="large"
+                round
+                @click="createDailyCombo"
+                >提交并生成</el-button
+            >
         </div>
     </el-card>
-    <combo-detail  :visible="detailVisible" :data="detailData"></combo-detail>
+    <combo-detail :visible="detailVisible" :data="detailData"></combo-detail>
 </template>
 
 <script setup lang="ts">
@@ -121,7 +128,7 @@ const handleChange = (index: number) => {
 };
 
 /* 对话框显示详情 */
-const detailVisible = ref<boolean>(false)
+const detailVisible = ref<boolean>(false);
 const detailData = ref<comboType>({
     id: 0,
     name: '',
@@ -129,43 +136,45 @@ const detailData = ref<comboType>({
     supplierName: '',
     flavor: '',
     weight: '',
-    image:[]
-})
+    image: [],
+});
 
 const showProviderDetail = (row: comboType, column: any) => {
     if (column.label !== '选择') {
-        detailVisible.value = false
-        detailData.value = row
-        setTimeout( ()=> {
-            detailVisible.value =true
-            console.log(detailVisible.value)
-        })
+        detailVisible.value = false;
+        detailData.value = row;
+        setTimeout(() => {
+            detailVisible.value = true;
+            console.log(detailVisible.value);
+        });
     }
-}
+};
 
 /* 提交 */
 const createDailyCombo = async () => {
     if (checkedNum.value < 3) {
         ElMessage({
             type: 'error',
-            message: '请选择三个套餐'
-        })
+            message: '请选择三个套餐',
+        });
     } else {
-        const setInfo = ref<number[]>([])
-        for(let i in checkedArr.value) {
+        const setInfo = ref<number[]>([]);
+        for (let i in checkedArr.value) {
             if (checkedArr.value[i] === true) {
-                setInfo.value.push(tableData.value[i].id)
+                setInfo.value.push(tableData.value[i].id);
             }
         }
-        const res = await ProviderService.createDailyCombo({setInfo: setInfo.value})
+        const res = await ProviderService.createDailyCombo({
+            setInfo: setInfo.value,
+        });
         if (res.code === 200) {
             ElMessage({
                 type: 'success',
-                message: '已生成'
-            })
+                message: '已生成',
+            });
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped></style>

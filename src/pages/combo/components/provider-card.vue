@@ -56,7 +56,10 @@
             @current-change="handlePageChange"
         />
     </el-card>
-    <provider-dialog :visible="detailVisible" :data="detailData"></provider-dialog>
+    <provider-dialog
+        :visible="detailVisible"
+        :data="detailData"
+    ></provider-dialog>
 </template>
 
 <script setup lang="ts">
@@ -119,7 +122,7 @@ const handlePageChange = (value: number) => {
 };
 
 /* 对话框显示详情 */
-const detailVisible = ref<boolean>(false)
+const detailVisible = ref<boolean>(false);
 const detailData = ref<providerType>({
     address: '',
     avatar: [],
@@ -127,17 +130,16 @@ const detailData = ref<providerType>({
     manager: '',
     name: '',
     phone: '',
-})
+});
 
 const showProviderDetail = (row: providerType) => {
-    detailVisible.value = false
-    detailData.value = row
-    setTimeout( ()=> {
-        detailVisible.value =true
-        console.log(detailVisible.value)
-    })
-}
-
+    detailVisible.value = false;
+    detailData.value = row;
+    setTimeout(() => {
+        detailVisible.value = true;
+        console.log(detailVisible.value);
+    });
+};
 </script>
 
 <style lang="scss" scoped></style>
