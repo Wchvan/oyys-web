@@ -93,12 +93,12 @@ const tableLabels = ref<Partial<Record<keyof comboType, string>>>({
 });
 
 const getCombos = async (params: getCombosParm) => {
-    const res = await ProviderService.getCombos(params)
+    const res = await ProviderService.getCombos(params);
     if (res.code === 200) {
         tableData.value = res.data.setArr;
         total.value = res.data.total;
     }
-    return res
+    return res;
 };
 getCombos({
     supplierId: providerId.value,
@@ -112,34 +112,34 @@ const handlePageChange = async (value: number) => {
         supplierId: providerId.value,
         page: value,
         pageSize: pageSize.value,
-    })
+    });
     if (res.code === 200) {
-        checkedArr.value = new Array(8).fill(false)
-        for(let i in res.data.setArr){
-            if(checkedMap.get(res.data.setArr[i].id)){
-                checkedArr.value[i] = true
+        checkedArr.value = new Array(8).fill(false);
+        for (let i in res.data.setArr) {
+            if (checkedMap.get(res.data.setArr[i].id)) {
+                checkedArr.value[i] = true;
             }
-            console.log()
+            console.log();
         }
     }
 };
 
 /* 选中相关 */
-const checkedMap = new Map()
+const checkedMap = new Map();
 const checkedArr = ref<boolean[]>(new Array(8).fill(false));
 const checkedNum = ref<number>(0);
 const handleChange = (index: number) => {
     if (checkedArr.value[index]) {
         if (checkedNum.value === 3) {
             checkedArr.value[index] = false;
-            checkedMap.delete(tableData.value[index].id)
+            checkedMap.delete(tableData.value[index].id);
         } else {
             checkedNum.value++;
-            checkedMap.set(tableData.value[index].id, true)
+            checkedMap.set(tableData.value[index].id, true);
         }
     } else {
         checkedNum.value--;
-        checkedMap.delete(tableData.value[index].id)
+        checkedMap.delete(tableData.value[index].id);
     }
 };
 
@@ -175,8 +175,8 @@ const createDailyCombo = async () => {
         });
     } else {
         const setInfo = ref<number[]>([]);
-        for (let i of checkedMap.keys()){
-            setInfo.value.push(i)
+        for (let i of checkedMap.keys()) {
+            setInfo.value.push(i);
         }
         const res = await ProviderService.createDailyCombo({
             setInfo: setInfo.value,
