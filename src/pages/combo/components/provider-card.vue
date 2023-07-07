@@ -142,7 +142,6 @@ const showProviderDetail = (row: providerType) => {
     detailData.value = row;
     setTimeout(() => {
         detailVisible.value = true;
-        console.log(detailVisible.value);
     });
 };
 </script>
