@@ -16,3 +16,8 @@ export enum ordersSumOption {
     'order' = 0,
     'dept' = 1,
 }
+
+export type orderSumType = {
+    num: number;
+    set: string;
+};

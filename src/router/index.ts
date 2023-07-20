@@ -54,7 +54,7 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: '/provider',
-        name: 'provider',
+        name: 'Provider',
         meta: {
             title: '供应商管理',
             keepAlive: true,
@@ -62,13 +62,13 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/pages/provider/provider.vue'),
     },
     {
-        path: '/user',
-        name: 'user',
+        path: '/employee',
+        name: 'Employee',
         meta: {
             title: '员工管理',
             keepAlive: true,
         },
-        component: () => import('@/pages/user/user.vue'),
+        component: () => import('@/pages/employee/employee.vue'),
     },
 ];
 

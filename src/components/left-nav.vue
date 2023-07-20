@@ -92,7 +92,7 @@
                 </template>
             </el-menu-item>
             <el-menu-item
-                index="/user"
+                index="/employee"
                 class="h-16"
                 style="background-color: #fff"
             >

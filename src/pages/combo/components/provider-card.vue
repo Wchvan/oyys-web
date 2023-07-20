@@ -69,7 +69,6 @@ import type { providerType } from '@/interface/provider/index';
 import useProviderStore from '@/store/provider/provider';
 import { getProvidersParm } from '@/interface/provider/api';
 import providerDialog from './provider-dialog.vue';
-import { pa } from 'element-plus/es/locale';
 
 const emit = defineEmits<{
     (e: 'enterPick', id: number, name: string): void;

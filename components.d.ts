@@ -34,6 +34,7 @@ declare module 'vue' {
         ElPopover: typeof import('element-plus/es')['ElPopover'];
         ElSelect: typeof import('element-plus/es')['ElSelect'];
         ElSubMenu: typeof import('element-plus/es')['ElSubMenu'];
+        ElSwitch: typeof import('element-plus/es')['ElSwitch'];
         ElTable: typeof import('element-plus/es')['ElTable'];
         ElTableColumn: typeof import('element-plus/es')['ElTableColumn'];
         IEpAvatar: typeof import('~icons/ep/avatar')['default'];

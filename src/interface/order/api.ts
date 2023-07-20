@@ -24,4 +24,12 @@ export type getOrdersSumParm = {
     type?: number;
 };
 
-export type getOrdersSumResp = apiRes<null>;
+export type getOrdersSumResp = apiRes<{
+    deptsArr: {
+        deptsArr: {
+            num: number;
+            set: string;
+        }[];
+    };
+    total: number;
+}>;
