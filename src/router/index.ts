@@ -70,6 +70,15 @@ const routes: Array<RouteRecordRaw> = [
         },
         component: () => import('@/pages/employee/employee.vue'),
     },
+    {
+        path: '/review',
+        name: 'Review',
+        meta: {
+            title: '评价管理',
+            keepAlive: true,
+        },
+        component: () => import('@/pages/review/review.vue'),
+    },
 ];
 
 const router = createRouter({

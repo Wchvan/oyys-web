@@ -4,28 +4,59 @@ import { apiRes } from '../type';
 export type getEmployeeListParm = {
     dept: string;
     name: string;
+    workNum: string;
     page: number;
     pageSize: number;
-    phone: string;
 };
 
 export type getEmployeeListResp = apiRes<{
     total: number;
-    usersArr: {
+    employeeList: {
         dept: string;
         name: string;
         phone: string;
-        /**
-         * 1为绑定，0为未绑定
-         */
         status: boolean;
         workNum: number;
     }[];
 }>;
 
-/* 解绑员工 */
-export type unbindEmployeeParm = {
+/* 新增员工 */
+export type addEmployeeParm = {
+    dept: string;
+    name: string;
+    phone: string;
+    workNum: string;
+};
+
+export type addEmployeeResp = apiRes<null>;
+
+/* 删除员工 */
+export type delEmployeeParm = {
+    list: number[];
+};
+export type delEmployeeResp = apiRes<null>;
+
+/* 更新员工信息 */
+export type updateEmployeeParm = {
+    dept: string;
+    id: number;
+    name: string;
+    phone: string;
+    workNum: string;
+};
+
+export type updateEmployeeResp = apiRes<null>;
+
+/* 禁用员工  */
+export type banEmployeeParm = {
     id: number;
 };
 
-export type unbindEmployeeResp = apiRes<null>;
+export type banEmployeeResp = apiRes<null>;
+
+/* 激活员工 */
+export type activateEmployeeParm = {
+    id: number;
+};
+
+export type activateEmployeeResp = apiRes<null>;

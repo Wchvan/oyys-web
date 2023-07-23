@@ -20,6 +20,7 @@ declare module 'vue' {
         ElDropdown: typeof import('element-plus/es')['ElDropdown'];
         ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem'];
         ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu'];
+        ElFooter: typeof import('element-plus/es')['ElFooter'];
         ElForm: typeof import('element-plus/es')['ElForm'];
         ElFormItem: typeof import('element-plus/es')['ElFormItem'];
         ElHeader: typeof import('element-plus/es')['ElHeader'];
@@ -38,6 +39,8 @@ declare module 'vue' {
         ElTable: typeof import('element-plus/es')['ElTable'];
         ElTableColumn: typeof import('element-plus/es')['ElTableColumn'];
         IEpAvatar: typeof import('~icons/ep/avatar')['default'];
+        IEpEditPan: typeof import('~icons/ep/edit-pan')['default'];
+        IEpEditPen: typeof import('~icons/ep/edit-pen')['default'];
         IEpHouse: typeof import('~icons/ep/house')['default'];
         IEpLock: typeof import('~icons/ep/lock')['default'];
         IEpSearch: typeof import('~icons/ep/search')['default'];

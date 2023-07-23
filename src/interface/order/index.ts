@@ -1,7 +1,10 @@
 export type orderType = {
+    date: string;
     dept: string;
+    id: number;
     name: string;
-    set: string;
+    setName: string;
+    status: string;
     workNum: string;
 };
 
@@ -17,7 +20,13 @@ export enum ordersSumOption {
     'dept' = 1,
 }
 
-export type orderSumType = {
-    num: number;
-    set: string;
-};
+export type orderSumType =
+    | {
+          name: string;
+          dept: string;
+          num: number;
+      }
+    | {
+          name: string;
+          num: number;
+      };

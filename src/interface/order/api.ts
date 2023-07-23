@@ -1,35 +1,51 @@
 import { apiRes } from '../type';
 
+/* 订单查询 */
 export type getOrdersParm = {
-    dept?: string;
-    name?: string;
+    dept: string;
+    name: string;
     page: number;
     pageSize: number;
-    today: number;
 };
 
 export type getOrdersResp = apiRes<{
     total: number;
-    ordersArr: {
+    orderList: {
+        date: string;
         dept: string;
+        id: number;
         name: string;
-        set: string;
+        setName: string;
+        status: string;
         workNum: string;
     }[];
 }>;
 
-export type getOrdersSumParm = {
+/* 按部门订单汇总 */
+export type getOrdersDeptSumParm = {
     page: number;
     pageSize: number;
-    type?: number;
 };
 
-export type getOrdersSumResp = apiRes<{
-    deptsArr: {
-        deptsArr: {
-            num: number;
-            set: string;
-        }[];
-    };
+export type getOrdersDeptSumResp = apiRes<{
+    collection: {
+        name: string;
+        dept: string;
+        num: number;
+    }[];
+    total: number;
+}>;
+
+/* 按套餐汇总订单 */
+export type getOrdersComboSumParm = {
+    page: number;
+    pageSize: number;
+};
+
+export type getOrdersComboSumResp = apiRes<{
+    collection: {
+        name: string;
+        num: number;
+    }[];
     total: number;
 }>;

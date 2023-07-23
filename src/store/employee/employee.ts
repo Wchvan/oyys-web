@@ -12,7 +12,7 @@ const useEmployeeStore = defineStore(
         const getEmloyeeList = async (params: getEmployeeListParm) => {
             const res = await EmployeeService.getEmloyeeList(params);
             if (res.code === 200) {
-                employeeList.value = res.data.usersArr;
+                employeeList.value = res.data.employeeList;
             }
             return res;
         };

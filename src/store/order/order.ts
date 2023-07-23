@@ -12,7 +12,6 @@ const useOrderStore = defineStore(
         const getOrderToday = async (params: getOrderTodayParm) => {
             const res = (await OrderService.getOrders({
                 ...params,
-                today: 1,
             })) as getOrdersResp;
             if (res.code === 200) {
                 orderList.value = res.data.ordersArr;

@@ -7,12 +7,12 @@ import {
 import { post } from '@/utils/request';
 
 const login = async (params: loginParm) => {
-    const res = (await post('/manager/login', params)) as loginResp;
+    const res = (await post('/managerlogin', params)) as loginResp;
     return res;
 };
 
 const logout = async (params: logoutParm) => {
-    const res = (await post('/manager/logout', params)) as logoutResp;
+    const res = (await post('/managerlogout', params)) as logoutResp;
     return res;
 };
 

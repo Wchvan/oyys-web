@@ -106,6 +106,17 @@
                 </template>
             </el-menu-item>
         </el-sub-menu>
+        <el-menu-item index="/review" class="h-16">
+            <template #title>
+                <div
+                    class="text-xl text-center"
+                    style="display: inline-flex; align-items: center"
+                >
+                    <i-ep-EditPen></i-ep-EditPen>
+                    <span class="ml-2">评价管理</span>
+                </div>
+            </template>
+        </el-menu-item>
     </el-menu>
 </template>
 

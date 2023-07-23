@@ -1,4 +1,5 @@
 export type employeeDataType = {
+    id: number;
     dept: string;
     name: string;
     phone: string;

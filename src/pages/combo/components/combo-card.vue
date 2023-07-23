@@ -33,13 +33,13 @@
                 </template>
             </el-table-column>
         </el-table>
-        <el-pagination
+        <!-- <el-pagination
             background
             layout="prev, pager, next"
             :total="total"
             class="center-x w-fit mt-4"
             @current-change="handlePageChange"
-        />
+        /> -->
         <div class="flex justify-end">
             <el-button
                 type="success"
@@ -57,7 +57,7 @@
 
 <script setup lang="ts">
 import ProviderService from '@/api/provider/provider';
-import { comboType, resDataType } from '@/interface/provider';
+import { comboDetailType, comboType, resDataType } from '@/interface/provider';
 import { getCombosParm } from '@/interface/provider/api';
 import useAdminStore from '@/store/admin/admin';
 import { getEndDay } from '@/utils/day/day';
@@ -81,7 +81,7 @@ watch(
     { deep: true },
 );
 
-const pageSize = ref<number>(8);
+// const pageSize = ref<number>(8);
 const total = ref<number>(0);
 
 /* 表格相关 */
@@ -92,37 +92,29 @@ const tableLabels = ref<Partial<Record<keyof comboType, string>>>({
     name: '套餐名称',
 });
 
-const getCombos = async (params: getCombosParm) => {
-    const res = await ProviderService.getCombos(params);
+const getCombos = async () => {
+    const res = await ProviderService.getActiveCombos({ id: providerId.value });
     if (res.code === 200) {
-        tableData.value = res.data.setArr;
+        tableData.value = res.data.setList;
         total.value = res.data.total;
     }
     return res;
 };
-getCombos({
-    supplierId: providerId.value,
-    page: 0,
-    pageSize: pageSize.value,
-});
+getCombos();
 
 /* 页码改变相关 */
-const handlePageChange = async (value: number) => {
-    const res = await getCombos({
-        supplierId: providerId.value,
-        page: value,
-        pageSize: pageSize.value,
-    });
-    if (res.code === 200) {
-        checkedArr.value = new Array(8).fill(false);
-        for (let i in res.data.setArr) {
-            if (checkedMap.get(res.data.setArr[i].id)) {
-                checkedArr.value[i] = true;
-            }
-            console.log();
-        }
-    }
-};
+// const handlePageChange = async (value: number) => {
+//     const res = await getCombos();
+//     if (res.code === 200) {
+//         checkedArr.value = new Array(8).fill(false);
+//         for (let i in res.data.setArr) {
+//             if (checkedMap.get(res.data.setArr[i].id)) {
+//                 checkedArr.value[i] = true;
+//             }
+//             console.log();
+//         }
+//     }
+// };
 
 /* 选中相关 */
 const checkedMap = new Map();
@@ -145,20 +137,23 @@ const handleChange = (index: number) => {
 
 /* 对话框显示详情 */
 const detailVisible = ref<boolean>(false);
-const detailData = ref<comboType>({
-    id: 0,
-    name: '',
+const detailData = ref<comboDetailType>({
     description: '',
-    supplierName: '',
     flavor: '',
+    id: -1,
+    image: '',
+    name: '',
+    status: true,
     weight: '',
-    image: [],
+    supplierName: '',
 });
 
 const showProviderDetail = (row: comboType, column: any) => {
     if (column.label !== '选择') {
         detailVisible.value = false;
-        detailData.value = row;
+        detailData.value = Object.assign(row, {
+            supplierName: providerName.value,
+        });
         setTimeout(() => {
             detailVisible.value = true;
             console.log(detailVisible.value);
@@ -179,17 +174,14 @@ const createDailyCombo = async () => {
             setInfo.value.push(i);
         }
         const res = await ProviderService.createDailyCombo({
-            setInfo: setInfo.value,
+            setIdList: setInfo.value,
         });
         if (res.code === 200) {
             ElMessage({
                 type: 'success',
                 message: '已生成当日套餐',
             });
-            const res = await ProviderService.getQRCode();
-            if (res.code === 200) {
-                resDialog(res.data);
-            }
+            resDialog();
         }
     }
 };
@@ -204,13 +196,13 @@ const resData = ref<resDataType>({
     QR: '',
 });
 
-const resDialog = (data: { url: string; QR: string }) => {
+const resDialog = () => {
     resData.value = {
         provider: providerName.value,
         date: getEndDay(),
         manager: useAdminStore().userName,
-        url: data.url,
-        QR: data.QR,
+        url: 'https://ts1.cn.mm.bing.net/',
+        QR: 'https://ts1.cn.mm.bing.net/th/id/R-C.260ff59a2bd16317baec7ba8a64a6325?rik=d5SKVqE7wLw62g&riu=http%3a%2f%2fphoto.16pic.com%2f00%2f07%2f42%2f16pic_742184_b.jpg&ehk=rVj8KASsMZwodFmuSX2aa6g7rQgKEBsF9p%2fLz3DiSVA%3d&risl=&pid=ImgRaw&r=0',
     };
     resVisible.value = false;
     setTimeout(() => {

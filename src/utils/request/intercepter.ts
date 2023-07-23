@@ -18,6 +18,7 @@ const axiosInstance: AxiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
         // 在发送请求之前做些什么
+        config.headers['token'] = useAdminStore().token;
         config.headers['Access-Control-Allow-Credentials'] = 'true';
         return config;
     },
@@ -41,8 +42,6 @@ axiosInstance.interceptors.response.use(
                     type: 'error',
                     message: response.data.msg,
                 });
-            } else if (response.headers?.token) {
-                useAdminStore().token = response.headers?.token;
             }
         }
         return response;

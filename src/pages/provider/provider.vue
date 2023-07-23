@@ -1,107 +1,44 @@
 <template>
-    <el-card class="w-full h-fit">
-        <template #header>
-            <el-input
-                v-model="inputVal"
-                placeholder="请输入内容"
-                size="large"
-                class="w-1/2"
+    <el-container class="w-full h-full p-4 flex-col">
+        <el-breadcrumb :separator-icon="ArrowRight" class="w-full mb-5">
+            <el-breadcrumb-item class="cursor-pointer text-lg" @click="back"
+                >供应商管理</el-breadcrumb-item
             >
-                <template #prepend>供应商名称：</template>
-                <template #append>
-                    <el-button
-                        id="search"
-                        type="primary"
-                        @click="searchProvider"
-                    >
-                        <template #icon> <i-ep-search></i-ep-search></template>
-                        搜索
-                    </el-button>
-                </template>
-            </el-input>
-        </template>
-        <el-table
-            ref="tableRef"
-            :data="tableData"
-            style="width: 100%; height: fit-content"
-            size="large"
-            row-key="date"
-            header-row-class-name="text-xl font-bold text-center"
-            row-class-name="text-lg font-semibold cursor-pointer"
-        >
-            <el-table-column
-                v-for="(item, index) in tableLabels"
-                :key="index"
-                :prop="index"
-                :label="item"
-                align="center"
-            />
-        </el-table>
-        <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="total"
-            class="center-x w-fit mt-2"
-            :current-page="page"
-            @current-change="handlePageChange"
-        />
-    </el-card>
+            <el-breadcrumb-item v-if="pickFlag" class="text-lg"
+                >套餐管理</el-breadcrumb-item
+            >
+        </el-breadcrumb>
+        <provider-manager
+            v-if="!pickFlag"
+            @enterPick="enterPick"
+        ></provider-manager>
+        <combo-manager
+            v-else
+            :id="providerId"
+            :name="providerName"
+        ></combo-manager>
+    </el-container>
 </template>
 
 <script setup lang="ts">
+import { ArrowRight } from '@element-plus/icons-vue';
 import { ref } from 'vue';
-import type { providerType } from '@/interface/provider/index';
-import useProviderStore from '@/store/provider/provider';
-import { getProvidersParm } from '@/interface/provider/api';
+import providerManager from './provider-manager/provider-manager.vue';
+import comboManager from './combo-manager/combo-manager.vue';
 
-const providerStore = useProviderStore();
-const pageSize = ref<number>(8);
-const total = ref<number>(0);
-const page = ref<number>(1);
-
-/* 搜索相关 */
-const inputVal = ref<string>('');
-
-const searchProvider = () => {
-    getProviders({
-        name: inputVal.value,
-        page: 1,
-        pageSize: pageSize.value,
-    });
-    page.value = 1;
+/* 是否进入选套餐界面 */
+const pickFlag = ref<boolean>(false);
+const back = () => {
+    pickFlag.value = false;
 };
 
-/* 表格数据相关 */
-const tableData = ref<providerType[]>([]);
-
-const getProviders = (params: getProvidersParm) => {
-    providerStore.getProviders(params).then((res) => {
-        tableData.value = providerStore.providersArr;
-        total.value = res.data.total;
-    });
-};
-
-const tableLabels = ref<Partial<Record<keyof providerType, string>>>({
-    id: '序号',
-    name: '供应商名称',
-    address: '地址',
-    manager: '管理者',
-    phone: '手机号',
-});
-
-getProviders({
-    page: 1,
-    pageSize: pageSize.value,
-});
-
-/* 页码改变相关 */
-const handlePageChange = (value: number) => {
-    page.value = value;
-    getProviders({
-        name: inputVal.value,
-        page: value,
-        pageSize: pageSize.value,
-    });
+/* 进入选菜界面 */
+const providerId = ref<number>(1);
+const providerName = ref<string>('');
+const enterPick = (id: number, name: string): void => {
+    pickFlag.value = true;
+    providerId.value = id;
+    providerName.value = name;
 };
 </script>
 

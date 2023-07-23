@@ -1,5 +1,6 @@
 import AdminServer from '@/api/admin/admin';
 import {
+    UserType,
     loginParm,
     loginResp,
     logoutParm,
@@ -13,10 +14,14 @@ const useAdminStore = defineStore(
     () => {
         const userName = ref<string>('');
         const token = ref<string>('');
+        const id = ref<number>(-1);
+        const userType = ref<UserType>(UserType.Admin);
 
         const init = () => {
             userName.value = '';
             token.value = '';
+            id.value = -1;
+            userType.value = UserType.Admin;
         };
 
         const login = async (params: loginParm) => {
@@ -24,6 +29,9 @@ const useAdminStore = defineStore(
 
             if (res.code === 200) {
                 userName.value = params.username;
+                token.value = res.data.token;
+                id.value = res.data.id;
+                userType.value = res.data.userType;
             }
 
             return res;

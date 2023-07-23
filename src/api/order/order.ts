@@ -1,27 +1,41 @@
 import {
+    getOrdersComboSumParm,
+    getOrdersComboSumResp,
+    getOrdersDeptSumParm,
+    getOrdersDeptSumResp,
     getOrdersParm,
     getOrdersResp,
-    getOrdersSumParm,
-    getOrdersSumResp,
 } from '@/interface/order/api';
-import { get } from '@/utils/request';
+import { get, post } from '@/utils/request';
 
+/* 订单查询 */
 const getOrders = async (params: getOrdersParm) => {
-    const res = (await get('/manager/getorders', params)) as getOrdersResp;
+    const res = (await post('/orders/getOrders', params)) as getOrdersResp;
     return res;
 };
 
-const getOrdersSum = async (params: getOrdersSumParm) => {
-    const res = (await get(
-        '/manager/getAllOrders',
+/* 按部门订单汇总 */
+const getOrdersDeptSum = async (params: getOrdersDeptSumParm) => {
+    const res = (await post(
+        '/orders/getCollectionByDept',
         params,
-    )) as getOrdersSumResp;
+    )) as getOrdersDeptSumResp;
+    return res;
+};
+
+/* 按套餐订单汇总 */
+const getOrdersComboSum = async (params: getOrdersComboSumParm) => {
+    const res = (await post(
+        '/orders/getCollectionBySet',
+        params,
+    )) as getOrdersComboSumResp;
     return res;
 };
 
 class OrderService {
     static getOrders = getOrders;
-    static getOrdersSum = getOrdersSum;
+    static getOrdersDeptSum = getOrdersDeptSum;
+    static getOrdersComboSum = getOrdersComboSum;
 }
 
 export default OrderService;

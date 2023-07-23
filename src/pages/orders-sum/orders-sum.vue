@@ -5,7 +5,7 @@
                 <div class="text-3xl font-semibold font-fk">订单汇总</div>
                 <div class="flex flex-row justify-end">
                     <el-select
-                        v-model="searchForm.type"
+                        v-model="type"
                         class="m-2"
                         size="large"
                         @change="handleTypeChange"
@@ -41,7 +41,7 @@
                 layout="prev, pager, next"
                 :total="total"
                 class="center-x w-fit mt-4"
-                :current-page="searchForm.page"
+                :current-page="page"
                 @current-change="handlePageChange"
             />
         </el-card>
@@ -49,9 +49,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { ordersSumOption, orderSumType } from '@/interface/order';
-import { getOrdersSumParm } from '@/interface/order/api';
 import OrderService from '@/api/order/order';
 
 const total = ref<number>(0);
@@ -61,41 +60,63 @@ const options = ref({
     部门: ordersSumOption.dept,
 });
 
-const searchForm = ref<getOrdersSumParm>({
-    page: 1,
-    pageSize: 10,
-    type: ordersSumOption.order,
-});
+const page = ref<number>(1);
+const pageSize = ref<number>(8);
+const type = ref<ordersSumOption>(ordersSumOption.order);
 
 /* 表格数据相关 */
 const tableData = ref<orderSumType[]>([]);
 
-const getOrderList = async (params: getOrdersSumParm) => {
-    OrderService.getOrdersSum(params).then((res) => {
-        if (res.code === 200) {
-            tableData.value = res.data.deptsArr.deptsArr;
-            total.value = res.data.total;
-        }
-    });
+const getOrderList = async () => {
+    if (type.value === ordersSumOption.order) {
+        OrderService.getOrdersComboSum({
+            page: page.value,
+            pageSize: pageSize.value,
+        }).then((res) => {
+            if (res.code === 200) {
+                console.log(res.data);
+                tableData.value = res.data.collection;
+            }
+        });
+    } else {
+        OrderService.getOrdersDeptSum({
+            page: page.value,
+            pageSize: pageSize.value,
+        }).then((res) => {
+            if (res.code === 200) {
+                tableData.value = res.data.collection;
+            }
+        });
+    }
 };
 
-const tableLabels = ref<Partial<Record<keyof orderSumType, string>>>({
-    set: '名称',
-    num: '数量',
+const tableLabels = computed(() => {
+    if (type.value === ordersSumOption.order) {
+        return {
+            name: '套餐名称',
+            num: '数量',
+        };
+    } else {
+        return {
+            name: '套餐名称',
+            dept: '部门名称',
+            num: '数量',
+        };
+    }
 });
 
-getOrderList(searchForm.value);
+getOrderList();
 
 /* 页码改变相关 */
 const handlePageChange = (value: number) => {
-    searchForm.value.page = value;
-    getOrderList(searchForm.value);
+    page.value = value;
+    getOrderList();
 };
 
 /* 选项改变相关 */
 const handleTypeChange = (value: ordersSumOption) => {
-    searchForm.value.type = value;
-    getOrderList(searchForm.value);
+    type.value = value;
+    getOrderList();
 };
 </script>
 

@@ -13,8 +13,8 @@
                 </div>
             </template>
             <el-container>
-                <el-aside width="50%">
-                    <img :src="resData.QR" class="w-36 h-36 center" />
+                <el-aside width="15rem">
+                    <img :src="resData.QR" class="w-40 h-40 center" />
                 </el-aside>
                 <el-main>
                     <div

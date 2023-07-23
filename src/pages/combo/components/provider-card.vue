@@ -1,24 +1,33 @@
 <template>
     <el-card class="w-full h-fit">
         <template #header>
-            <el-input
-                v-model="inputVal"
-                placeholder="请输入内容"
-                size="large"
-                class="w-1/2"
-            >
-                <template #prepend>供应商名称：</template>
-                <template #append>
-                    <el-button
-                        id="search"
-                        type="primary"
-                        @click="searchProvider"
-                    >
-                        <template #icon> <i-ep-search></i-ep-search></template>
-                        搜索
-                    </el-button>
-                </template>
-            </el-input>
+            <div class="flex flex-row">
+                <el-input
+                    v-model="searchForm.name"
+                    placeholder="请输入内容"
+                    size="large"
+                    class="w-1/3 mr-4"
+                >
+                    <template #prepend>供应商：</template>
+                </el-input>
+                <el-input
+                    v-model="searchForm.manager"
+                    placeholder="请输入内容"
+                    size="large"
+                    class="w-1/3 mr-4"
+                >
+                    <template #prepend>负责人：</template>
+                </el-input>
+                <el-button
+                    id="search"
+                    type="primary"
+                    size="large"
+                    @click="searchProvider"
+                >
+                    <template #icon> <i-ep-search></i-ep-search></template>
+                    搜索
+                </el-button>
+            </div>
         </template>
         <el-table
             ref="tableRef"
@@ -48,14 +57,31 @@
                 </template>
             </el-table-column>
         </el-table>
-        <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="total"
-            class="center-x w-fit mt-2"
-            :current-page="page"
-            @current-change="handlePageChange"
-        />
+
+        <div class="py-4 relative">
+            <el-pagination
+                background
+                layout="prev, pager, next"
+                :total="total"
+                class="center-x w-fit mt-2"
+                :current-page="searchForm.page"
+                @current-change="handlePageChange"
+            />
+            <div class="absolute right-8 w-fit top-5">
+                <el-select
+                    v-model="searchForm.pageSize"
+                    placeholder="每页8条"
+                    size="large"
+                    @change="pageSizeChange"
+                >
+                    <el-option label="每页5条" :value="5"></el-option>
+                    <el-option label="每页8条" :value="8"></el-option>
+                    <el-option label="每页10条" :value="10"></el-option>
+                    <el-option label="每页15条" :value="15"></el-option>
+                    <el-option label="每页20条" :value="20"></el-option>
+                </el-select>
+            </div>
+        </div>
     </el-card>
     <provider-dialog
         :visible="detailVisible"
@@ -75,20 +101,21 @@ const emit = defineEmits<{
 }>();
 
 const providerStore = useProviderStore();
-const pageSize = ref<number>(8);
 const total = ref<number>(0);
-const page = ref<number>(1);
+
+const searchForm = ref<getProvidersParm>({
+    address: '',
+    manager: '',
+    name: '',
+    page: 1,
+    pageSize: 8,
+    phone: '',
+});
 
 /* 搜索相关 */
-const inputVal = ref<string>('');
-
 const searchProvider = () => {
-    getProviders({
-        name: inputVal.value,
-        page: 1,
-        pageSize: pageSize.value,
-    });
-    page.value = 1;
+    getProviders(searchForm.value);
+    searchForm.value.page = 1;
 };
 
 const handleClick = (index: number) => {
@@ -110,30 +137,29 @@ const tableLabels = ref<Partial<Record<keyof providerType, string>>>({
     name: '供应商名称',
 });
 
-getProviders({
-    page: 1,
-    pageSize: pageSize.value,
-});
+getProviders(searchForm.value);
 
 /* 页码改变相关 */
 const handlePageChange = (value: number) => {
-    page.value = value;
-    getProviders({
-        name: inputVal.value,
-        page: value,
-        pageSize: pageSize.value,
-    });
+    searchForm.value.page = value;
+    getProviders(searchForm.value);
+};
+
+const pageSizeChange = (value: number) => {
+    searchForm.value.pageSize = value;
+    searchForm.value.page = 1;
+    getProviders(searchForm.value);
 };
 
 /* 对话框显示详情 */
 const detailVisible = ref<boolean>(false);
 const detailData = ref<providerType>({
     address: '',
-    avatar: [],
     id: 0,
     manager: '',
     name: '',
     phone: '',
+    status: false,
 });
 
 const showProviderDetail = (row: providerType) => {

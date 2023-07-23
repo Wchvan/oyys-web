@@ -58,16 +58,17 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { orderType, getOrderTodayParm } from '@/interface/order/index';
+import { orderType } from '@/interface/order/index';
+import { getOrdersParm } from '@/interface/order/api';
 import useOrderStore from '@/store/order/order';
 
 const orderStore = useOrderStore();
 const total = ref<number>(0);
 
 /* 搜索相关 */
-const searchForm = ref<getOrderTodayParm>({
+const searchForm = ref<getOrdersParm>({
     page: 1,
-    pageSize: 10,
+    pageSize: 8,
     dept: '',
     name: '',
 });
@@ -80,20 +81,23 @@ const searchOrders = () => {
 /* 表格数据相关 */
 const tableData = ref<orderType[]>([]);
 
-const getOrderList = async (params: getOrderTodayParm) => {
+const getOrderList = async (params: getOrdersParm) => {
     orderStore.getOrderToday(params).then((res) => {
         if (res.code === 200) {
-            tableData.value = res.data.ordersArr;
+            tableData.value = res.data.orderList;
             total.value = res.data.total;
         }
     });
 };
 
 const tableLabels = ref<Partial<Record<keyof orderType, string>>>({
-    dept: '部门名称',
-    name: '员工名称',
-    set: '套餐名称',
-    workNum: '套餐数量',
+    id: '订单号',
+    workNum: '工号',
+    name: '姓名',
+    setName: '套餐名',
+    dept: '部门',
+    date: '时间',
+    status: '是否核销',
 });
 
 getOrderList(searchForm.value);

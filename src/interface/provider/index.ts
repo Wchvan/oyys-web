@@ -1,20 +1,24 @@
 export type providerType = {
     address: string;
-    avatar: string[];
     id: number;
     manager: string;
     name: string;
     phone: string;
+    status: boolean;
 };
 
 export type comboType = {
     description: string;
     flavor: string;
     id: number;
-    image: string[];
-    supplierName: string;
-    weight: string;
+    image: string;
     name: string;
+    status: boolean;
+    weight: string;
+};
+
+export type comboDetailType = comboType & {
+    supplierName: string;
 };
 
 export type resDataType = {

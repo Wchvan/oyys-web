@@ -13,12 +13,7 @@
                 </div>
             </template>
             <el-carousel class="w-1/2 center-x mt-2" height="12rem">
-                <el-carousel-item
-                    v-for="(item, index) in comboData.image"
-                    :key="index"
-                >
-                    <img class="w-full h-full" :src="item" />
-                </el-carousel-item>
+                <img class="w-full h-full" :src="comboData.image" />
             </el-carousel>
             <div
                 v-for="(item, key, index) in dataLabels"
@@ -45,15 +40,15 @@
 
 <script setup lang="ts">
 import { watch, ref } from 'vue';
-import { comboType } from '@/interface/provider';
+import { comboDetailType, comboType } from '@/interface/provider';
 
 /* 对话框显示相关 */
 const centerDialogVisible = ref<boolean>(false);
 const props = defineProps<{
     visible: boolean;
-    data: comboType;
+    data: comboDetailType;
 }>();
-const comboData = ref<comboType>(props.data);
+const comboData = ref<comboDetailType>(props.data);
 watch(
     () => props,
     (newVal) => {
@@ -64,11 +59,11 @@ watch(
 );
 
 /* 标签 */
-const dataLabels = ref<Partial<Record<keyof comboType, string>>>({
+const dataLabels = ref<Partial<Record<keyof comboDetailType, string>>>({
     id: '编号',
     name: '名称',
-    description: '形容',
-    supplierName: '供应商商',
+    description: '详情',
+    supplierName: '供应商',
     flavor: '风味',
     weight: '重量',
 });

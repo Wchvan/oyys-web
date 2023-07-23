@@ -1,11 +1,22 @@
 import { apiRes } from '../type';
 
 export type loginParm = {
-    username: string;
     password: string;
+    username: string;
 };
 
-export type loginResp = apiRes<null>;
+export enum UserType {
+    Admin = 'ADMIN',
+    Manager = 'MANAGER',
+    User = 'USER',
+}
+
+export type loginResp = apiRes<{
+    id: number;
+    token: string;
+    username: string;
+    userType: UserType;
+}>;
 
 export type logoutParm = {
     token: string;

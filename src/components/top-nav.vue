@@ -29,7 +29,7 @@
                         class="self-center mr-2 text-2xl font-fz navTitle"
                         style="color: #fff"
                     >
-                        Admin
+                        {{ adminStore.userName }}
                         <el-icon class="el-icon--right">
                             <arrow-down />
                         </el-icon>

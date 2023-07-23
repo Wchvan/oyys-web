@@ -14,7 +14,7 @@ const useProviderStore = defineStore(
                 params,
             )) as getProvidersResp;
             if (res.code === 200) {
-                providersArr.value = res.data.providersArr;
+                providersArr.value = res.data.supplierList;
             }
             return res;
         };
