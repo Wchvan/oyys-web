@@ -36,14 +36,30 @@
                     align="center"
                 />
             </el-table>
-            <el-pagination
-                background
-                layout="prev, pager, next"
-                :total="total"
-                class="center-x w-fit mt-4"
-                :current-page="page"
-                @current-change="handlePageChange"
-            />
+            <div class="py-4 relative">
+                <el-pagination
+                    background
+                    layout="prev, pager, next"
+                    :total="total"
+                    class="center-x w-fit mt-2"
+                    :current-page="page"
+                    @current-change="handlePageChange"
+                />
+                <div class="absolute right-8 w-fit top-5">
+                    <el-select
+                        v-model="pageSize"
+                        placeholder="每页8条"
+                        size="large"
+                        @change="pageSizeChange"
+                    >
+                        <el-option label="每页5条" :value="5"></el-option>
+                        <el-option label="每页8条" :value="8"></el-option>
+                        <el-option label="每页10条" :value="10"></el-option>
+                        <el-option label="每页15条" :value="15"></el-option>
+                        <el-option label="每页20条" :value="20"></el-option>
+                    </el-select>
+                </div>
+            </div>
         </el-card>
     </el-main>
 </template>
@@ -110,6 +126,11 @@ getOrderList();
 /* 页码改变相关 */
 const handlePageChange = (value: number) => {
     page.value = value;
+    getOrderList();
+};
+const pageSizeChange = (value: number) => {
+    pageSize.value = value;
+    page.value = 1;
     getOrderList();
 };
 

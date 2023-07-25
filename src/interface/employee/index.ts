@@ -7,5 +7,5 @@ export type employeeDataType = {
      * 1为绑定，0为未绑定
      */
     status: boolean;
-    workNum: number;
+    workNum: string;
 };

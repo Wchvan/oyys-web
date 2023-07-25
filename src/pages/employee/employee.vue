@@ -62,6 +62,7 @@
                 row-key="date"
                 header-row-class-name="text-xl font-bold text-center"
                 row-class-name="text-lg font-semibold cursor-pointer"
+                @row-click="changeInfo"
             >
                 <el-table-column
                     v-for="(item, index) in tableLabels"
@@ -141,6 +142,11 @@
         :visible="createVisible"
         @update="initGetEmployee"
     ></employee-create>
+    <employee-update
+        :visible="detailVisible"
+        :data="detailData"
+        @update="getEmployees(searchForm)"
+    ></employee-update>
     <el-dialog
         v-model="deleteVisible"
         width="40%"
@@ -176,6 +182,7 @@ import { ElMessage } from 'element-plus';
 import { ref } from 'vue';
 import useEmployeeStore from '../../store/employee/employee';
 import employeeCreate from './employee-create.vue';
+import employeeUpdate from './employee-update.vue';
 
 const employeeStore = useEmployeeStore();
 const total = ref<number>(0);
@@ -314,6 +321,27 @@ const createDialog = () => {
     setTimeout(() => {
         createVisible.value = true;
     });
+};
+
+/* 改变员工信息 */
+const detailVisible = ref<boolean>(false);
+const detailData = ref<employeeDataType>({
+    id: 0,
+    name: '',
+    phone: '',
+    dept: '',
+    workNum: '',
+    status: false,
+});
+
+const changeInfo = (row: employeeDataType, col: any) => {
+    if (col.label !== '是否可点餐' && col.label !== '选择') {
+        detailVisible.value = false;
+        detailData.value = row;
+        setTimeout(() => {
+            detailVisible.value = true;
+        });
+    }
 };
 </script>
 

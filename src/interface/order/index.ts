@@ -9,8 +9,8 @@ export type orderType = {
 };
 
 export type getOrderTodayParm = {
-    dept?: string;
-    name?: string;
+    dept: string;
+    name: string;
     page: number;
     pageSize: number;
 };

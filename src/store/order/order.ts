@@ -14,7 +14,7 @@ const useOrderStore = defineStore(
                 ...params,
             })) as getOrdersResp;
             if (res.code === 200) {
-                orderList.value = res.data.ordersArr;
+                orderList.value = res.data.orderList;
             }
             return res;
         };

@@ -21,6 +21,7 @@
                 <el-input
                     v-model="providerData[key]"
                     :input-style="{ fontSize: '1.25rem' }"
+                    :disabled="key === 'id'"
                 ></el-input>
             </div>
         </el-card>
