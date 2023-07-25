@@ -72,18 +72,18 @@
                         {{ item.comment }}
                     </el-main>
                     <el-footer
-                        style="padding: 1rem 1rem; height: 8rem"
+                        style="padding: 1rem 1rem; height: 10rem"
                         class="flex flex-row"
                     >
                         <img
                             v-for="url in item.image"
                             :key="url"
                             style="
-                                width: 6rem;
-                                height: 6rem;
+                                width: 8rem;
+                                height: 8rem;
                                 margin-right: 0.25rem;
                             "
-                            :stc="url"
+                            :src="url"
                         />
                     </el-footer>
                 </el-container>

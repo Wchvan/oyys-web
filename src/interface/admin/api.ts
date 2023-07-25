@@ -1,5 +1,6 @@
 import { apiRes } from '../type';
 
+/* 登录 */
 export type loginParm = {
     password: string;
     username: string;
@@ -18,8 +19,16 @@ export type loginResp = apiRes<{
     userType: UserType;
 }>;
 
+/* 登出 */
 export type logoutParm = {
-    token: string;
+    id: number;
 };
 
 export type logoutResp = apiRes<null>;
+
+/* 设置通知 */
+export type setNoticeParm = {
+    notice: string;
+};
+
+export type setNoticeResp = apiRes<null>;

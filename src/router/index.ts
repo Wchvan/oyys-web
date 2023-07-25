@@ -44,15 +44,6 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/pages/orders-sum/orders-sum.vue'),
     },
     {
-        path: '/orders-history',
-        name: 'OrdersHistory',
-        meta: {
-            title: '历史订单',
-            keepAlive: true,
-        },
-        component: () => import('@/pages/orders-history/orders-history.vue'),
-    },
-    {
         path: '/provider',
         name: 'Provider',
         meta: {
@@ -78,6 +69,33 @@ const routes: Array<RouteRecordRaw> = [
             keepAlive: true,
         },
         component: () => import('@/pages/review/review.vue'),
+    },
+    {
+        path: '/verificate',
+        name: 'Verificate',
+        meta: {
+            title: '核销订单',
+            keepAlive: true,
+        },
+        component: () => import('@/pages/verificate/verificate.vue'),
+    },
+    {
+        path: '/notice',
+        name: 'Notice',
+        meta: {
+            title: '通知设置',
+            keepAlive: true,
+        },
+        component: () => import('@/pages/notice/notice.vue'),
+    },
+    {
+        path: '/visualization',
+        name: 'Visualization',
+        meta: {
+            title: '可视化',
+            keepAlive: true,
+        },
+        component: () => import('@/pages/visualization/visualization.vue'),
     },
 ];
 

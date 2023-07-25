@@ -95,6 +95,7 @@ import type { providerType } from '@/interface/provider/index';
 import useProviderStore from '@/store/provider/provider';
 import { getProvidersParm } from '@/interface/provider/api';
 import providerDialog from './provider-dialog.vue';
+import ProviderService from '@/api/provider/provider';
 
 const emit = defineEmits<{
     (e: 'enterPick', id: number, name: string): void;
@@ -126,8 +127,8 @@ const handleClick = (index: number) => {
 const tableData = ref<providerType[]>([]);
 
 const getProviders = (params: getProvidersParm) => {
-    providerStore.getProviders(params).then((res) => {
-        tableData.value = providerStore.providersArr;
+    ProviderService.getActiveProviders(params).then((res) => {
+        tableData.value = res.data.supplierList;
         total.value = res.data.total;
     });
 };

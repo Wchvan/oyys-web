@@ -1,7 +1,7 @@
 <template>
     <el-dialog
         v-model="centerDialogVisible"
-        width="50%"
+        width="55rem"
         top="10%"
         center
         destroy-on-close
@@ -14,7 +14,7 @@
             </template>
             <el-container>
                 <el-aside width="15rem">
-                    <img :src="resData.QR" class="w-40 h-40 center" />
+                    <img :src="resData.QR || QR" class="w-40 h-40 center" />
                 </el-aside>
                 <el-main>
                     <div
@@ -22,7 +22,7 @@
                         :key="index"
                         class="text-lg py-2 flex flex-row w-full"
                     >
-                        <div class="w-1/4 mx-3">{{ item }}:</div>
+                        <div class="w-36 mx-3">{{ item }}:</div>
                         <span>{{ resData[key] }}</span>
                     </div>
                 </el-main>
@@ -44,6 +44,7 @@
 <script setup lang="ts">
 import { watch, ref } from 'vue';
 import { resDataType } from '@/interface/provider';
+import QR from '@/assets/qr.png';
 
 /* 对话框显示相关 */
 const centerDialogVisible = ref<boolean>(false);

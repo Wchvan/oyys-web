@@ -46,6 +46,7 @@ const useAdminStore = defineStore(
         return {
             userName,
             token,
+            id,
             logout,
             login,
         };

@@ -11,6 +11,7 @@ declare module 'vue' {
         ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb'];
         ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem'];
         ElButton: typeof import('element-plus/es')['ElButton'];
+        ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup'];
         ElCard: typeof import('element-plus/es')['ElCard'];
         ElCarousel: typeof import('element-plus/es')['ElCarousel'];
         ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem'];
@@ -38,11 +39,17 @@ declare module 'vue' {
         ElSwitch: typeof import('element-plus/es')['ElSwitch'];
         ElTable: typeof import('element-plus/es')['ElTable'];
         ElTableColumn: typeof import('element-plus/es')['ElTableColumn'];
+        ElTimePicker: typeof import('element-plus/es')['ElTimePicker'];
+        ElTimeSelect: typeof import('element-plus/es')['ElTimeSelect'];
+        ElUpload: typeof import('element-plus/es')['ElUpload'];
         IEpAvatar: typeof import('~icons/ep/avatar')['default'];
+        IEpBell: typeof import('~icons/ep/bell')['default'];
         IEpEditPan: typeof import('~icons/ep/edit-pan')['default'];
         IEpEditPen: typeof import('~icons/ep/edit-pen')['default'];
         IEpHouse: typeof import('~icons/ep/house')['default'];
         IEpLock: typeof import('~icons/ep/lock')['default'];
+        IEpPieChart: typeof import('~icons/ep/pie-chart')['default'];
+        IEpPlus: typeof import('~icons/ep/plus')['default'];
         IEpSearch: typeof import('~icons/ep/search')['default'];
         IEpStopwatch: typeof import('~icons/ep/stopwatch')['default'];
         IEpTickets: typeof import('~icons/ep/tickets')['default'];

@@ -12,6 +12,7 @@ export type getEmployeeListParm = {
 export type getEmployeeListResp = apiRes<{
     total: number;
     employeeList: {
+        id: number;
         dept: string;
         name: string;
         phone: string;

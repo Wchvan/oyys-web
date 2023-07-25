@@ -32,9 +32,9 @@ const back = () => {
 const providerId = ref<number>(1);
 const providerName = ref<string>('');
 const enterPick = (id: number, name: string): void => {
-    pickFlag.value = true;
     providerId.value = id;
     providerName.value = name;
+    pickFlag.value = true;
 };
 </script>
 

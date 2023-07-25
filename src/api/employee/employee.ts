@@ -33,7 +33,7 @@ export const addEmployee = async (params: addEmployeeParm) => {
 
 /* 删除员工 */
 export const delEmployee = async (params: delEmployeeParm) => {
-    const res = (await get(
+    const res = (await post(
         '/employee/deleteEmployee',
         params,
     )) as delEmployeeResp;

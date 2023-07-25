@@ -53,6 +53,31 @@
     </el-card>
     <combo-detail :visible="detailVisible" :data="detailData"></combo-detail>
     <combo-res :visible="resVisible" :data="resData"></combo-res>
+    <el-dialog
+        v-model="timeVisible"
+        width="40%"
+        top="5%"
+        center
+        destroy-on-close
+    >
+        <el-card class="box-card">
+            <template #header>
+                <div class="text-center text-2xl font-semibold">
+                    <span>确认截止时间</span>
+                </div>
+            </template>
+            <div class="text-lg py-2 flex flex-row justify-center">
+                <el-time-picker v-model="time" size="large" />
+            </div>
+        </el-card>
+        <template #footer>
+            <span class="dialog-footer">
+                <el-button type="primary" size="large" @click="createConfirm">
+                    确认
+                </el-button>
+            </span>
+        </template>
+    </el-dialog>
 </template>
 
 <script setup lang="ts">
@@ -60,7 +85,7 @@ import ProviderService from '@/api/provider/provider';
 import { comboDetailType, comboType, resDataType } from '@/interface/provider';
 import { getCombosParm } from '@/interface/provider/api';
 import useAdminStore from '@/store/admin/admin';
-import { getEndDay } from '@/utils/day/day';
+import { getEndDay, getTime } from '@/utils/day/day';
 import { ElMessage } from 'element-plus';
 import { ref, watch } from 'vue';
 import comboDetail from './combo-detail.vue';
@@ -169,20 +194,35 @@ const createDailyCombo = async () => {
             message: '请选择三个套餐',
         });
     } else {
-        const setInfo = ref<number[]>([]);
-        for (let i of checkedMap.keys()) {
-            setInfo.value.push(i);
-        }
-        const res = await ProviderService.createDailyCombo({
-            setIdList: setInfo.value,
+        timeVisible.value = true;
+    }
+};
+
+/* 确认截止时间 */
+const timeVisible = ref<boolean>(false);
+const time = ref<Date>(new Date());
+time.value.setHours(15);
+time.value.setMinutes(0);
+time.value.setSeconds(0);
+const createConfirm = async () => {
+    const setInfo = ref<number[]>([]);
+    for (let i of checkedMap.keys()) {
+        setInfo.value.push(i);
+    }
+    const res = await ProviderService.createDailyCombo({
+        setIdList: setInfo.value,
+        deadline: getTime(time.value),
+    });
+    if (res.code === 200) {
+        ElMessage({
+            type: 'success',
+            message: '已生成当日套餐',
         });
-        if (res.code === 200) {
-            ElMessage({
-                type: 'success',
-                message: '已生成当日套餐',
-            });
-            resDialog();
-        }
+        timeVisible.value = false;
+        resDialog();
+    } else if (res.code === 12) {
+        timeVisible.value = false;
+        resDialog();
     }
 };
 
@@ -201,8 +241,8 @@ const resDialog = () => {
         provider: providerName.value,
         date: getEndDay(),
         manager: useAdminStore().userName,
-        url: 'https://ts1.cn.mm.bing.net/',
-        QR: 'https://ts1.cn.mm.bing.net/th/id/R-C.260ff59a2bd16317baec7ba8a64a6325?rik=d5SKVqE7wLw62g&riu=http%3a%2f%2fphoto.16pic.com%2f00%2f07%2f42%2f16pic_742184_b.jpg&ehk=rVj8KASsMZwodFmuSX2aa6g7rQgKEBsF9p%2fLz3DiSVA%3d&risl=&pid=ImgRaw&r=0',
+        url: 'http://162.14.79.224:5167',
+        QR: '',
     };
     resVisible.value = false;
     setTimeout(() => {

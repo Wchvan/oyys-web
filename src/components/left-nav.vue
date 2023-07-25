@@ -17,6 +17,17 @@
                 </div>
             </template>
         </el-menu-item>
+        <el-menu-item index="/visualization" class="h-16">
+            <template #title>
+                <div
+                    class="text-xl text-center"
+                    style="display: inline-flex; align-items: center"
+                >
+                    <i-ep-pieChart></i-ep-pieChart>
+                    <span class="ml-2">可视化</span>
+                </div>
+            </template>
+        </el-menu-item>
         <el-sub-menu index="/orders" class="h-fit">
             <template #title>
                 <div
@@ -56,14 +67,25 @@
                 </template>
             </el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="/orders-history" class="h-16">
+        <el-menu-item index="/verificate" class="h-16">
             <template #title>
                 <div
                     class="text-xl text-center"
                     style="display: inline-flex; align-items: center"
                 >
                     <i-ep-Stopwatch></i-ep-Stopwatch>
-                    <span class="ml-2">历史订单</span>
+                    <span class="ml-2">核销</span>
+                </div>
+            </template>
+        </el-menu-item>
+        <el-menu-item index="/notice" class="h-16">
+            <template #title>
+                <div
+                    class="text-xl text-center"
+                    style="display: inline-flex; align-items: center"
+                >
+                    <i-ep-Bell></i-ep-Bell>
+                    <span class="ml-2">通知</span>
                 </div>
             </template>
         </el-menu-item>

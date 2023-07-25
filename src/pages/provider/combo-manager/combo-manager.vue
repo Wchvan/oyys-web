@@ -61,10 +61,13 @@
                                     comboList[index][key]
                                 }}</span>
                                 <el-input
-                                    v-else
+                                    v-if="key !== 'id' && changeFlag[index]"
                                     v-model="comboList[index][key]"
                                     style="width: 70%"
                                 ></el-input>
+                                <span v-if="key !== 'id' && !changeFlag[index]">
+                                    {{ comboList[index][key] }}
+                                </span>
                             </div>
                         </div>
                         <div
@@ -80,13 +83,28 @@
                             />
                         </div>
                     </el-main>
-                    <el-footer class="h-12 w-full flex flex-row justify-end">
+                    <el-footer
+                        class="h-12 w-full flex flex-row justify-between"
+                    >
+                        <div>
+                            <span class="text-lg font-semibold"
+                                >是否启用：</span
+                            >
+                            <el-switch
+                                v-model="comboList[index].status"
+                                size="large"
+                                @change="handleStatusChange(index)"
+                            >
+                            </el-switch>
+                        </div>
                         <el-button
                             class="w-1/3"
                             round
                             type="primary"
                             @click="handleUpdate(index)"
-                            >修改</el-button
+                            >{{
+                                changeFlag[index] ? '完成' : '修改'
+                            }}</el-button
                         >
                     </el-footer>
                 </el-container>
@@ -174,7 +192,7 @@ const handleDelete = async () => {
     for (let i of checkedMap.keys()) {
         list.value.push(i);
     }
-    ProviderService.deleteProvider({
+    ProviderService.deleteCombo({
         list: list.value,
     }).then((res) => {
         if (res.code === 200) {
@@ -189,6 +207,27 @@ const handleDelete = async () => {
     delFlag.value = false;
 };
 
+/* 修改套餐信息 */
+const changeFlag = ref<boolean[]>(
+    new Array(comboList.value.length).fill(false),
+);
+const handleUpdate = async (index: number) => {
+    changeFlag.value[index] = !changeFlag.value[index];
+    if (!changeFlag.value[index]) {
+        ProviderService.updateCombo({
+            ...comboList.value[index],
+            supplierId: providerId.value,
+        }).then((res) => {
+            if (res.code === 200) {
+                ElMessage({
+                    type: 'success',
+                    message: '修改成功',
+                });
+            }
+        });
+    }
+};
+
 /* 获取套餐列表 */
 const getCombos = async () => {
     ProviderService.getCombos({
@@ -198,6 +237,7 @@ const getCombos = async () => {
             comboList.value = res.data.setList;
             checkedArr.value = new Array(comboList.value.length).fill(false);
             checkedMap.clear();
+            changeFlag.value = new Array(comboList.value.length).fill(false);
         }
     });
 };
@@ -221,19 +261,36 @@ const createDialog = () => {
     });
 };
 
-/* 修改套餐信息 */
-const handleUpdate = async (index: number) => {
-    ProviderService.updateCombo({
-        ...comboList.value[index],
-        supplierId: providerId.value,
-    }).then((res) => {
-        if (res.code === 200) {
-            ElMessage({
-                type: 'success',
-                message: '修改成功',
-            });
-        }
-    });
+/* 禁用和启用套餐 */
+const handleStatusChange = (index: number) => {
+    if (!comboList.value[index].status) {
+        ProviderService.banCombo({ id: comboList.value[index].id }).then(
+            (res) => {
+                if (res.code === 200) {
+                    ElMessage({
+                        type: 'success',
+                        message: '禁用成功',
+                    });
+                } else {
+                    comboList.value[index].status =
+                        !comboList.value[index].status;
+                }
+            },
+        );
+    } else {
+        ProviderService.activateCombo({
+            id: comboList.value[index].id,
+        }).then((res) => {
+            if (res.code === 200) {
+                ElMessage({
+                    type: 'success',
+                    message: '启用成功',
+                });
+            } else {
+                comboList.value[index].status = !comboList.value[index].status;
+            }
+        });
+    }
 };
 </script>
 

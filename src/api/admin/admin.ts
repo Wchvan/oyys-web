@@ -3,6 +3,8 @@ import {
     loginResp,
     logoutParm,
     logoutResp,
+    setNoticeParm,
+    setNoticeResp,
 } from '@/interface/admin/api';
 import { post } from '@/utils/request';
 
@@ -16,9 +18,15 @@ const logout = async (params: logoutParm) => {
     return res;
 };
 
+const setNotice = async (params: setNoticeParm) => {
+    const res = (await post('/setList/setNotice', params)) as setNoticeResp;
+    return res;
+};
+
 class AdminServer {
     static logout = logout;
     static login = login;
+    static setNotice = setNotice;
 }
 
 export default AdminServer;

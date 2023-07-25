@@ -57,7 +57,7 @@ const router = useRouter();
 const adminStore = useAdminStore();
 
 const logout = async () => {
-    adminStore.logout({ token: adminStore.token });
+    adminStore.logout({ id: adminStore.id });
     router.push('/login');
 };
 </script>

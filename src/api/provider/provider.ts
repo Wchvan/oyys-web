@@ -1,18 +1,26 @@
 import { get, post, del } from '@/utils/request';
 import {
+    activateComboParm,
+    activateComboResp,
     activateProviderParm,
     addComboParm,
     addComboResp,
     addProviderParm,
     addProviderResp,
+    banComboParm,
+    banComboResp,
     banProviderParm,
     banProviderRes,
     createDailyComboParm,
     createDailyComboResp,
+    deleteComboParm,
+    deleteComboResp,
     deleteProviderParm,
     deleteProviderRes,
     getActiveCombosParm,
     getActiveCombosResp,
+    getActiveProvidersParm,
+    getActiveProvidersResp,
     getCombosParm,
     getCombosResp,
     getProvidersParm,
@@ -28,6 +36,15 @@ const getProviders = async (params: getProvidersParm) => {
         '/supplier/getSuppliers',
         params,
     )) as getProvidersResp;
+    return res;
+};
+
+/* 获取启用状态下的供应商列表 */
+const getActiveProviders = async (params: getActiveProvidersParm) => {
+    const res = (await post(
+        '/setList/getSuppliers',
+        params,
+    )) as getActiveProvidersResp;
     return res;
 };
 
@@ -48,7 +65,7 @@ const banProvider = async (params: banProviderParm) => {
 
 /* 删除供应商 */
 const deleteProvider = async (params: deleteProviderParm) => {
-    const res = (await del(
+    const res = (await post(
         '/supplier/deleteSupplier',
         params,
     )) as deleteProviderRes;
@@ -75,7 +92,7 @@ const getCombos = async (params: getCombosParm) => {
 
 /* 获取供应商启用状态下的套餐 */
 const getActiveCombos = async (params: getActiveCombosParm) => {
-    const res = (await post('/setList/getSets', params)) as getActiveCombosResp;
+    const res = (await get('/setList/getSets', params)) as getActiveCombosResp;
     return res;
 };
 
@@ -109,8 +126,27 @@ const updateCombo = async (params: updateComboParm) => {
     return res;
 };
 
+/* 启用套餐 */
+const activateCombo = async (params: activateComboParm) => {
+    const res = (await get('/set/activateSet', params)) as activateComboResp;
+    return res;
+};
+
+/* 禁用套餐 */
+const banCombo = async (params: banComboParm) => {
+    const res = (await get('/set/banSet', params)) as banComboResp;
+    return res;
+};
+
+/* 删除套餐 */
+const deleteCombo = async (params: deleteComboParm) => {
+    const res = (await post('/set/deleteSet', params)) as deleteComboResp;
+    return res;
+};
+
 class ProviderService {
     static getProviders = getProviders;
+    static getActiveProviders = getActiveProviders;
     static addProvider = addProvider;
     static getCombos = getCombos;
     static getActiveCombos = getActiveCombos;
@@ -121,6 +157,9 @@ class ProviderService {
     static updateProvider = updateProvider;
     static addCombo = addCombo;
     static updateCombo = updateCombo;
+    static activateCombo = activateCombo;
+    static banCombo = banCombo;
+    static deleteCombo = deleteCombo;
 }
 
 export default ProviderService;

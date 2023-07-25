@@ -23,6 +23,16 @@
                     :input-style="{ fontSize: '1.25rem' }"
                 ></el-input>
             </div>
+            <el-upload
+                v-model:file-list="comboData.image"
+                :limit="1"
+                action=""
+                :auto-upload="false"
+                list-type="picture-card"
+                class="center-x w-fit mt-2"
+            >
+                <i-ep-plus></i-ep-plus>
+            </el-upload>
         </el-card>
         <template #footer>
             <span class="dialog-footer">
@@ -39,6 +49,7 @@ import ProviderService from '@/api/provider/provider';
 import { addComboParm } from '@/interface/provider/api';
 import { ElMessage } from 'element-plus';
 import { watch, ref } from 'vue';
+import { uploadFile } from '@/utils/uploadFile/uploadFile';
 const emit = defineEmits<{
     (e: 'update'): void;
 }>();
@@ -61,7 +72,7 @@ watch(
 const comboData = ref<addComboParm>({
     description: '',
     flavor: '',
-    image: '',
+    image: [],
     name: '',
     supplierId: props.id,
     weight: '',
@@ -78,6 +89,7 @@ const dataLabels = ref<Partial<Record<keyof addComboParm, string>>>({
 const addProvider = async () => {
     for (let i in comboData.value) {
         if (comboData.value[i as keyof addComboParm] === '') {
+            console.log(comboData.value[i as keyof addComboParm], i);
             ElMessage({
                 type: 'error',
                 message: '请填好每个输入框',
@@ -85,16 +97,21 @@ const addProvider = async () => {
             return;
         }
     }
-    ProviderService.addCombo(comboData.value).then((res) => {
-        if (res.code === 200) {
-            ElMessage({
-                type: 'success',
-                message: '成功',
-            });
-            emit('update');
-            centerDialogVisible.value = false;
-        }
-    });
+    console.log(comboData.value.image[0]);
+    const res = await uploadFile(comboData.value.image[0].raw);
+    if (res.code === 200) {
+        comboData.value.image = res.data.url;
+        ProviderService.addCombo(comboData.value).then((res) => {
+            if (res.code === 200) {
+                ElMessage({
+                    type: 'success',
+                    message: '成功',
+                });
+                emit('update');
+                centerDialogVisible.value = false;
+            }
+        });
+    }
 };
 </script>
 

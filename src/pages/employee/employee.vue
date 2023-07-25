@@ -108,6 +108,7 @@
                     :total="total"
                     class="center-x w-fit mt-2"
                     :current-page="searchForm.page"
+                    :page-size="searchForm.pageSize"
                     @current-change="handlePageChange"
                 />
                 <div class="absolute right-8 w-fit top-5 mr-2">
@@ -196,7 +197,7 @@ const searchEmployee = () => {
 const changeStatus = (index: number) => {
     if (!tableData.value[index].status) {
         EmployeeService.banEmployee({
-            id: tableData.value[index].workNum,
+            id: tableData.value[index].id,
         }).then((res) => {
             if (res.code !== 200) {
                 tableData.value[index].status = !tableData.value[index].status;
@@ -209,7 +210,7 @@ const changeStatus = (index: number) => {
         });
     } else {
         EmployeeService.activateEmployee({
-            id: tableData.value[index].workNum,
+            id: tableData.value[index].id,
         }).then((res) => {
             if (res.code !== 200) {
                 tableData.value[index].status = !tableData.value[index].status;
