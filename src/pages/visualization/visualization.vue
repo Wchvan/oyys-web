@@ -5,13 +5,13 @@
             style="border-radius: 1rem"
         >
             <el-main class="flex flex-row justify-center h-fit center-y">
-                <div class="flex-1 h-96 mx-16" style="border-radius: 20px">
+                <div class="flex-1 h-96 mx-2" style="border-radius: 20px">
                     <popular-chart
                         v-if="popularData.length !== 0"
                         :data="popularData"
                     ></popular-chart>
                 </div>
-                <div class="flex-1 h-96 bg-slate-500 mx-16">
+                <div class="flex-1 h-96 bg-slate-500 mx-3">
                     <top-chart
                         v-if="topData.length !== 0"
                         :data="topData"
