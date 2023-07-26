@@ -42,10 +42,11 @@ axiosInstance.interceptors.response.use(
                     type: 'error',
                     message: response.data.msg,
                 });
-            } else if (response.data.code === 1) {
-                useAdminStore().logout({
-                    id: useAdminStore().id,
-                });
+                if (response.data.code === 1) {
+                    useAdminStore().logout({
+                        id: useAdminStore().id,
+                    });
+                }
             }
         }
         return response;
