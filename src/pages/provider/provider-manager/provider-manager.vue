@@ -158,7 +158,7 @@
     <provider-create-many
         :visible="createManyVisible"
         @update="initGetProviders"
-        ></provider-create-many>
+    ></provider-create-many>
     <el-dialog
         v-model="deleteVisible"
         width="40%"
@@ -196,7 +196,6 @@ import providerCreate from './provider-create.vue';
 import providerCreateMany from './provider-create-many.vue';
 import ProviderService from '@/api/provider/provider';
 import { ElMessage } from 'element-plus';
-
 
 const emit = defineEmits<{
     (e: 'enterPick', id: number, name: string): void;

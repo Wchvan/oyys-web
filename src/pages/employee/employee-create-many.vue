@@ -14,14 +14,16 @@
                 multiple
                 :on-success="handleSuccess"
             >
-                <i-ep-upload class=" center-x" style="color: #ccc; font-size: 8rem;"><upload-filled /></i-ep-upload>
+                <i-ep-upload
+                    class="center-x"
+                    style="color: #ccc; font-size: 8rem"
+                    ><upload-filled
+                /></i-ep-upload>
                 <div class="el-upload__text">
-                Drop file here or <em>click to upload</em>
+                    Drop file here or <em>click to upload</em>
                 </div>
                 <template #tip>
-                <div class="el-upload__tip">
-                    Excel
-                </div>
+                    <div class="el-upload__tip">Excel</div>
                 </template>
             </el-upload>
         </el-card>
@@ -50,23 +52,20 @@ watch(
 );
 
 const handleSuccess = (res: apiRes<null>) => {
-    if(res.code === 200) {
+    if (res.code === 200) {
         ElMessage({
             type: 'success',
-            message: '导入成功'
-        })
-        emit('update')
-        centerDialogVisible.value = false
+            message: '导入成功',
+        });
+        emit('update');
+        centerDialogVisible.value = false;
     } else {
         ElMessage({
             type: 'error',
-            message: res.msg
-        })
+            message: res.msg,
+        });
     }
-}
-
-
-
+};
 </script>
 
 <style lang="scss" scoped></style>

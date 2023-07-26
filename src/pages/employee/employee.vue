@@ -155,9 +155,10 @@
         :data="detailData"
         @update="getEmployees(searchForm)"
     ></employee-update>
-    <employee-create-many 
+    <employee-create-many
         :visible="createManyVisible"
-        @update="initGetEmployee"></employee-create-many>
+        @update="initGetEmployee"
+    ></employee-create-many>
     <el-dialog
         v-model="deleteVisible"
         width="40%"
