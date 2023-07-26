@@ -6,6 +6,7 @@ export type loginParm = {
     username: string;
 };
 
+/* 管理员类型 */
 export enum UserType {
     Admin = 'ADMIN',
     Manager = 'MANAGER',
