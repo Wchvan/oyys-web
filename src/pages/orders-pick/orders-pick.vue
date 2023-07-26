@@ -4,25 +4,25 @@
             <template #header>
                 <div class="text-3xl font-semibold font-fk">员工订单详情</div>
                 <div class="flex flex-row justify-end w-full">
-                        <span class="text-lg font-semibold">套餐名称：</span>
-                        <el-input
-                            v-model="searchForm.name"
-                            style="width: 16rem"
-                            class="mr-3"
-                        ></el-input>
-                        <span class="text-lg font-semibold">部门：</span>
-                        <el-input
-                            v-model="searchForm.dept"
-                            style="width: 16rem"
-                            class="mr-3"
-                        ></el-input>
-                        <el-button
-                            type="primary"
-                            round
-                            class="w-24"
-                            @click="searchOrders"
-                            >查询</el-button
-                        >
+                    <span class="text-lg font-semibold">套餐名称：</span>
+                    <el-input
+                        v-model="searchForm.name"
+                        style="width: 16rem"
+                        class="mr-3"
+                    ></el-input>
+                    <span class="text-lg font-semibold">部门：</span>
+                    <el-input
+                        v-model="searchForm.dept"
+                        style="width: 16rem"
+                        class="mr-3"
+                    ></el-input>
+                    <el-button
+                        type="primary"
+                        round
+                        class="w-24"
+                        @click="searchOrders"
+                        >查询</el-button
+                    >
                 </div>
             </template>
             <el-table
