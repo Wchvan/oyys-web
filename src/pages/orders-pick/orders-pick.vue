@@ -3,18 +3,17 @@
         <el-card class="w-full h-fit">
             <template #header>
                 <div class="text-3xl font-semibold font-fk">员工订单详情</div>
-                <div class="flex flex-row justify-end">
-                    <div class="w-1/2">
+                <div class="flex flex-row justify-end w-full">
                         <span class="text-lg font-semibold">套餐名称：</span>
                         <el-input
                             v-model="searchForm.name"
-                            style="width: 30%"
+                            style="width: 16rem"
                             class="mr-3"
                         ></el-input>
                         <span class="text-lg font-semibold">部门：</span>
                         <el-input
                             v-model="searchForm.dept"
-                            style="width: 30%"
+                            style="width: 16rem"
                             class="mr-3"
                         ></el-input>
                         <el-button
@@ -24,7 +23,6 @@
                             @click="searchOrders"
                             >查询</el-button
                         >
-                    </div>
                 </div>
             </template>
             <el-table
