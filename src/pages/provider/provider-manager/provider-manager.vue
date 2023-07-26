@@ -46,6 +46,14 @@
                     >
                         新增
                     </el-button>
+                    <el-button
+                        type="primary"
+                        class="w-24"
+                        size="large"
+                        @click="createManyDialog"
+                    >
+                        从EXCEL导入
+                    </el-button>
                 </div>
             </div>
         </template>
@@ -147,6 +155,10 @@
         :visible="createVisible"
         @update="initGetProviders"
     ></provider-create>
+    <provider-create-many
+        :visible="createManyVisible"
+        @update="initGetProviders"
+        ></provider-create-many>
     <el-dialog
         v-model="deleteVisible"
         width="40%"
@@ -181,8 +193,11 @@ import useProviderStore from '@/store/provider/provider';
 import { getProvidersParm } from '@/interface/provider/api';
 import providerDetail from './provider-detail.vue';
 import providerCreate from './provider-create.vue';
+import providerCreateMany from './provider-create-many.vue';
 import ProviderService from '@/api/provider/provider';
 import { ElMessage } from 'element-plus';
+
+
 const emit = defineEmits<{
     (e: 'enterPick', id: number, name: string): void;
 }>();
@@ -320,6 +335,15 @@ const createDialog = () => {
     createVisible.value = false;
     setTimeout(() => {
         createVisible.value = true;
+    });
+};
+
+/* 批量新增 */
+const createManyVisible = ref<boolean>(false);
+const createManyDialog = () => {
+    createManyVisible.value = false;
+    setTimeout(() => {
+        createManyVisible.value = true;
     });
 };
 

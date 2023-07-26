@@ -48,6 +48,7 @@ declare module 'vue' {
         IEpSearch: typeof import('~icons/ep/search')['default'];
         IEpStopwatch: typeof import('~icons/ep/stopwatch')['default'];
         IEpTickets: typeof import('~icons/ep/tickets')['default'];
+        IEpUpload: typeof import('~icons/ep/upload')['default'];
         IEpUser: typeof import('~icons/ep/user')['default'];
         LeftNav: typeof import('./src/components/left-nav.vue')['default'];
         RouterLink: typeof import('vue-router')['RouterLink'];

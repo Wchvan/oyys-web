@@ -52,6 +52,14 @@
                     >
                         新增
                     </el-button>
+                    <el-button
+                        type="primary"
+                        class="w-24"
+                        size="large"
+                        @click="createManyDialog"
+                    >
+                        从EXCEL导入
+                    </el-button>
                 </div>
             </template>
             <el-table
@@ -147,6 +155,9 @@
         :data="detailData"
         @update="getEmployees(searchForm)"
     ></employee-update>
+    <employee-create-many 
+        :visible="createManyVisible"
+        @update="initGetEmployee"></employee-create-many>
     <el-dialog
         v-model="deleteVisible"
         width="40%"
@@ -183,6 +194,7 @@ import { ref } from 'vue';
 import useEmployeeStore from '../../store/employee/employee';
 import employeeCreate from './employee-create.vue';
 import employeeUpdate from './employee-update.vue';
+import employeeCreateMany from './employee-create-many.vue';
 
 const employeeStore = useEmployeeStore();
 const total = ref<number>(0);
@@ -320,6 +332,15 @@ const createDialog = () => {
     createVisible.value = false;
     setTimeout(() => {
         createVisible.value = true;
+    });
+};
+
+/* 批量新增 */
+const createManyVisible = ref<boolean>(false);
+const createManyDialog = () => {
+    createManyVisible.value = false;
+    setTimeout(() => {
+        createManyVisible.value = true;
     });
 };
 

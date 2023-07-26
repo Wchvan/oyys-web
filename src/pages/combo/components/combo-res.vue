@@ -9,7 +9,7 @@
         <el-card class="box-card">
             <template #header>
                 <div class="text-center text-2xl font-semibold">
-                    <span>供应商详情</span>
+                    <span>今日套餐</span>
                 </div>
             </template>
             <el-container>
@@ -65,7 +65,7 @@ watch(
 /* 标签 */
 const dataLabels = ref<Partial<Record<keyof resDataType, string>>>({
     provider: '供应商',
-    date: '截止日期',
+    date: '截止时间',
     url: '网页链接',
     manager: '负责人',
 });
