@@ -9,7 +9,14 @@ export type reviewType = {
 };
 
 export type searchFormType = {
-    setName: string;
+    setName?: string;
     page: number;
     pageSize: number;
+    supplierId?: number;
+};
+
+export type setInfoType = {
+    setName: string;
+    supplierId: number;
+    supplierName: string;
 };

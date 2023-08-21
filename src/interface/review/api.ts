@@ -2,7 +2,11 @@ import { apiRes } from '../type';
 
 /* 获取订单名字列表 */
 export type getComboNameListResp = apiRes<{
-    setNameList: string[];
+    setInfoList: {
+        setName: string;
+        supplierId: number;
+        supplierName: string;
+    }[];
     total: number;
 }>;
 
@@ -10,7 +14,8 @@ export type getComboNameListResp = apiRes<{
 export type getReviewsParm = {
     page: number;
     pageSize: number;
-    setName: string;
+    setName?: string;
+    supplierId?: number;
 };
 export type getReviewsResp = apiRes<{
     commentList: {

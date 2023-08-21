@@ -9,16 +9,16 @@
                 style="border-bottom: 1.5px solid #eee"
             >
                 <el-select
-                    v-model="searchForm.setName"
+                    v-model="selectVal"
                     size="large"
                     @change="setChange"
                 >
                     <el-option label="所有套餐" :value="''"></el-option>
                     <el-option
-                        v-for="item in setNameList"
-                        :key="item"
-                        :label="item"
-                        :value="item"
+                        v-for="item in setInfoList"
+                        :key="item.supplierId"
+                        :label="`${item.setName}-${item.supplierName}`"
+                        :value="`${item.setName}-${item.supplierId}`"
                     ></el-option>
                 </el-select>
                 <el-button
@@ -146,14 +146,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { ReviewService } from '@/api/review/review';
-import { reviewType, searchFormType } from '@/interface/review';
+import { reviewType, searchFormType, setInfoType } from '@/interface/review';
 import { ElMessage } from 'element-plus';
 
+const selectVal = ref<string>('')
 const searchForm = ref<searchFormType>({
     setName: '',
     page: 1,
     pageSize: 8,
+    supplierId: undefined,
 });
+
 const total = ref<number>(0);
 const reviewList = ref<reviewType[]>([]);
 
@@ -197,16 +200,18 @@ const handleDelete = async () => {
 };
 
 /* 套餐名称 */
-const setNameList = ref<string[]>([]);
+const setInfoList = ref<setInfoType[]>([]);
 const getSetNameList = async () => {
     ReviewService.getComboNameList().then((res) => {
         if (res.code === 200) {
-            setNameList.value = res.data.setNameList;
+            setInfoList.value = res.data.setInfoList;
         }
     });
 };
 getSetNameList();
 const setChange = async () => {
+    searchForm.value.setName = selectVal.value.split('-')[0]
+    searchForm.value.supplierId = Number(selectVal.value.split('-')[1])
     getReviews();
 };
 
