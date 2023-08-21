@@ -8,11 +8,7 @@
                 class="flex flex-row justify-end"
                 style="border-bottom: 1.5px solid #eee"
             >
-                <el-select
-                    v-model="selectVal"
-                    size="large"
-                    @change="setChange"
-                >
+                <el-select v-model="selectVal" size="large" @change="setChange">
                     <el-option label="所有套餐" :value="''"></el-option>
                     <el-option
                         v-for="item in setInfoList"
@@ -149,7 +145,7 @@ import { ReviewService } from '@/api/review/review';
 import { reviewType, searchFormType, setInfoType } from '@/interface/review';
 import { ElMessage } from 'element-plus';
 
-const selectVal = ref<string>('')
+const selectVal = ref<string>('');
 const searchForm = ref<searchFormType>({
     setName: '',
     page: 1,
@@ -210,8 +206,8 @@ const getSetNameList = async () => {
 };
 getSetNameList();
 const setChange = async () => {
-    searchForm.value.setName = selectVal.value.split('-')[0]
-    searchForm.value.supplierId = Number(selectVal.value.split('-')[1])
+    searchForm.value.setName = selectVal.value.split('-')[0];
+    searchForm.value.supplierId = Number(selectVal.value.split('-')[1]);
     getReviews();
 };
 
