@@ -40,7 +40,12 @@
 
 <script setup lang="ts">
 import { VisualizationService } from '@/api/visualization/visualization';
-import { likedSetType, popularSetType, supplierDataType, topSetType } from '@/interface/visualization';
+import {
+    likedSetType,
+    popularSetType,
+    supplierDataType,
+    topSetType,
+} from '@/interface/visualization';
 import { ref } from 'vue';
 import popularChart from './components/popular-chart.vue';
 import topChart from './components/top-chart.vue';
@@ -61,21 +66,20 @@ VisualizationService.getTopSets().then((res) => {
     }
 });
 
-const supplierData = ref<supplierDataType[]>([])
+const supplierData = ref<supplierDataType[]>([]);
 VisualizationService.getSupplierChart().then((res) => {
     if (res.code === 200) {
         supplierData.value = res.data.supplierList;
-        console.log(supplierData.value)
+        console.log(supplierData.value);
     }
 });
 
-const likedSetData = ref<likedSetType[]>([])
+const likedSetData = ref<likedSetType[]>([]);
 VisualizationService.getLikedSetChart().then((res) => {
     if (res.code === 200) {
         likedSetData.value = res.data.setList.slice(0, 5);
     }
 });
-
 </script>
 
 <style lang="scss" scoped></style>

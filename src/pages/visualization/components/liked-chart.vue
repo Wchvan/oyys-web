@@ -13,13 +13,13 @@ const props = defineProps<{
 }>();
 
 function init() {
-    const label = ref<string[]>([])
-    const data = ref<number[]>([])
+    const label = ref<string[]>([]);
+    const data = ref<number[]>([]);
 
     props.data.forEach((item) => {
-        label.value.push(item.name)
-        data.value.push(item.num)
-    })
+        label.value.push(item.name);
+        data.value.push(item.num);
+    });
 
     const option = {
         backgroundColor: '#38445E',
@@ -34,41 +34,41 @@ function init() {
             top: '15px',
         },
         tooltip: {
-            trigger: "axis",
+            trigger: 'axis',
             axisPointer: {
-                type: "shadow",
+                type: 'shadow',
             },
             formatter: (params: any) => {
-                let i :any = 0
-                for ( i in props.data) {
-                    if (props.data[i].name === params[0].data.name){
-                        break
+                let i: any = 0;
+                for (i in props.data) {
+                    if (props.data[i].name === params[0].data.name) {
+                        break;
                     }
                 }
-                let str = ''
-                str += `<div>${props.data[i].name} - ${props.data[i].supplierName} : 收藏${props.data[i].num}次</div>`
-                
-                return str
-            }
+                let str = '';
+                str += `<div>${props.data[i].name} - ${props.data[i].supplierName} : 收藏${props.data[i].num}次</div>`;
+
+                return str;
+            },
         },
         grid: {
-            top: "30%",
-            right: "3%",
-            left: "5%",
-            bottom: "12%",
+            top: '30%',
+            right: '3%',
+            left: '5%',
+            bottom: '12%',
         },
         xAxis: [
             {
-                type: "category",
+                type: 'category',
                 data: label.value,
                 axisLine: {
                     lineStyle: {
-                        color: "rgba(255,255,255,0.12)",
+                        color: 'rgba(255,255,255,0.12)',
                     },
                 },
                 axisLabel: {
                     margin: 10,
-                    color: "#e2e9ff",
+                    color: '#e2e9ff',
                     textStyle: {
                         fontSize: 14,
                     },
@@ -78,24 +78,24 @@ function init() {
         yAxis: [
             {
                 axisLabel: {
-                    formatter: "{value}",
-                    color: "#e2e9ff",
+                    formatter: '{value}',
+                    color: '#e2e9ff',
                 },
                 axisLine: {
                     show: false,
                 },
                 splitLine: {
                     lineStyle: {
-                        color: "rgba(255,255,255,0.12)",
+                        color: 'rgba(255,255,255,0.12)',
                     },
                 },
             },
         ],
         series: [
             {
-                type: "bar",
+                type: 'bar',
                 data: data.value,
-                barWidth: "20px",
+                barWidth: '20px',
                 itemStyle: {
                     normal: {
                         color: new echarts.graphic.LinearGradient(
@@ -106,17 +106,17 @@ function init() {
                             [
                                 {
                                     offset: 0,
-                                    color: "rgba(0,244,255,1)", // 0% 处的颜色
+                                    color: 'rgba(0,244,255,1)', // 0% 处的颜色
                                 },
                                 {
                                     offset: 1,
-                                    color: "rgba(0,77,167,1)", // 100% 处的颜色
+                                    color: 'rgba(0,77,167,1)', // 100% 处的颜色
                                 },
                             ],
-                            false
+                            false,
                         ),
                         barBorderRadius: [30, 30, 30, 30],
-                        shadowColor: "rgba(0,160,221,1)",
+                        shadowColor: 'rgba(0,160,221,1)',
                         shadowBlur: 4,
                     },
                 },
@@ -126,25 +126,29 @@ function init() {
                         lineHeight: 30,
                         width: 80,
                         height: 30,
-                        backgroundColor: "rgba(0,160,221,0.1)",
+                        backgroundColor: 'rgba(0,160,221,0.1)',
                         borderRadius: 200,
-                        position: ["-8", "-60"],
+                        position: ['-8', '-60'],
                         distance: 1,
-                        formatter: ["    {d|●}", " {a|{c}}     \n", "    {b|}"].join(","),
+                        formatter: [
+                            '    {d|●}',
+                            ' {a|{c}}     \n',
+                            '    {b|}',
+                        ].join(','),
                         rich: {
                             d: {
-                                color: "#3CDDCF",
+                                color: '#3CDDCF',
                             },
                             a: {
-                                color: "#fff",
-                                align: "center",
+                                color: '#fff',
+                                align: 'center',
                             },
                             b: {
                                 width: 1,
                                 height: 30,
                                 borderWidth: 1,
-                                borderColor: "#234e6c",
-                                align: "left",
+                                borderColor: '#234e6c',
+                                align: 'left',
                             },
                         },
                     },

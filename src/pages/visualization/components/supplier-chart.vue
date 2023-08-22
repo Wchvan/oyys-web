@@ -12,15 +12,17 @@ const props = defineProps<{
     data: supplierDataType[];
 }>();
 function init() {
-    const label = ref<string[]>([])
-    const data = ref<number[]>([])
-    const top = props.data[0].num
-    
+    const label = ref<string[]>([]);
+    const data = ref<number[]>([]);
+    const top = props.data[0].num;
+
     props.data.forEach((item) => {
-        label.value.push(item.name)
-        data.value.push(Math.floor(item.num / top * 40 + item.avg / 5 * 60))
-    })
-    
+        label.value.push(item.name);
+        data.value.push(
+            Math.floor((item.num / top) * 40 + (item.avg / 5) * 60),
+        );
+    });
+
     const option = {
         backgroundColor: '#38445E',
         title: {
@@ -34,33 +36,33 @@ function init() {
             top: '15px',
         },
         grid: {
-            top: "12%",
-            right: "3%",
-            left: "25%",
-            bottom: "5%",
+            top: '12%',
+            right: '3%',
+            left: '25%',
+            bottom: '5%',
         },
         tooltip: {
-            trigger: "axis",
+            trigger: 'axis',
             axisPointer: {
-                type: "shadow",
+                type: 'shadow',
             },
             formatter: (params: any) => {
-                let i :any = 0
-                for ( i in props.data) {
-                    if (props.data[i].name === params[0].axisValueLabel){
-                        break
+                let i: any = 0;
+                for (i in props.data) {
+                    if (props.data[i].name === params[0].axisValueLabel) {
+                        break;
                     }
                 }
-                let str = ''
-                str += `<div>${props.data[i].name} - 总分：${params[0].value}</div> ${props.data[i].num}次五星 - 平均分: ${props.data[i].avg}`
-                
-                return str
-            }
+                let str = '';
+                str += `<div>${props.data[i].name} - 总分：${params[0].value}</div> ${props.data[i].num}次五星 - 平均分: ${props.data[i].avg}`;
+
+                return str;
+            },
         },
         xAxis: {
             show: false,
-            type: "value",
-            name: "(单位:次)",
+            type: 'value',
+            name: '(单位:次)',
         },
         yAxis: [
             {
@@ -73,53 +75,54 @@ function init() {
                     show: false,
                 },
                 axisLabel: {
-                    color: "#fff",
+                    color: '#fff',
                     fontSize: 12,
-                    align: "center",
+                    align: 'center',
                     margin: 80,
-                    formatter: function (value:any, index:any) {
-                        var sureInd = label.value.map((item) => item).indexOf(value) + 1;
+                    formatter: function (value: any, index: any) {
+                        var sureInd =
+                            label.value.map((item) => item).indexOf(value) + 1;
                         if (sureInd == 1) {
-                            return "{a|" + sureInd + "}" + "{e|" + value + "}";
+                            return '{a|' + sureInd + '}' + '{e|' + value + '}';
                         } else if (sureInd == 2) {
-                            return "{b|" + sureInd + "}" + "{e|" + value + "}";
+                            return '{b|' + sureInd + '}' + '{e|' + value + '}';
                         } else if (sureInd == 3) {
-                            return "{c|" + sureInd + "}" + "{e|" + value + "}";
+                            return '{c|' + sureInd + '}' + '{e|' + value + '}';
                         } else if (sureInd == 4) {
-                            return "{d|" + sureInd + "}" + "{e|" + value + "}";
+                            return '{d|' + sureInd + '}' + '{e|' + value + '}';
                         } else {
-                            return "{d|" + sureInd + "}" + "{e|" + value + "}";
+                            return '{d|' + sureInd + '}' + '{e|' + value + '}';
                         }
                     },
                     rich: {
                         a: {
-                            backgroundColor: "#F7B500",
+                            backgroundColor: '#F7B500',
                             width: 18,
                             height: 18,
                             lineHeight: 20,
                             borderRadius: 9,
                         },
                         e: {
-                            color: "#666666",
+                            color: '#666666',
                             width: 100,
-                            textAlign: "center",
+                            textAlign: 'center',
                         },
                         b: {
-                            backgroundColor: "#B7B7B7",
+                            backgroundColor: '#B7B7B7',
                             width: 18,
                             height: 18,
                             lineHeight: 20,
                             borderRadius: 9,
                         },
                         c: {
-                            backgroundColor: "#F27C00",
+                            backgroundColor: '#F27C00',
                             width: 18,
                             height: 18,
                             lineHeight: 20,
                             borderRadius: 9,
                         },
                         d: {
-                            backgroundColor: "#0068DB",
+                            backgroundColor: '#0068DB',
                             width: 18,
                             height: 18,
                             lineHeight: 20,
@@ -130,7 +133,7 @@ function init() {
             },
             {
                 inverse: true, //反向
-                position: "right", //坐标轴位置，移至右边
+                position: 'right', //坐标轴位置，移至右边
                 axisLine: {
                     show: false,
                 },
@@ -140,10 +143,10 @@ function init() {
                 show: false,
                 data: label.value,
                 axisLabel: {
-                    color: "#333",
-                    formatter: function (value:any, index:any) {
+                    color: '#333',
+                    formatter: function (value: any, index: any) {
                         if (value.length > 7) {
-                            return value.slice(0, 6) + "...";
+                            return value.slice(0, 6) + '...';
                         } else {
                             return value;
                         }
@@ -154,13 +157,13 @@ function init() {
 
         series: [
             {
-                name: "数据量",
-                type: "bar",
+                name: '数据量',
+                type: 'bar',
                 barWidth: 20,
                 data: data.value, //次数列表
                 yAxisIndex: 0, //使用右侧y轴
                 color: {
-                    type: "linear",
+                    type: 'linear',
                     x: 0,
                     y: 0,
                     x2: 1,
@@ -168,11 +171,11 @@ function init() {
                     colorStops: [
                         {
                             offset: 1,
-                            color: "#0fe5e3", // 0% 处的颜色
+                            color: '#0fe5e3', // 0% 处的颜色
                         },
                         {
                             offset: 0,
-                            color: "#2ca1d6", // 100% 处的颜色
+                            color: '#2ca1d6', // 100% 处的颜色
                         },
                     ],
                     global: false, // 缺省为 false
@@ -188,7 +191,6 @@ function init() {
             },
         ],
     };
-
 
     let mychart = echarts.init(chart.value);
     mychart.setOption(option);
