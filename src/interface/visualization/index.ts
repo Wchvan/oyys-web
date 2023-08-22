@@ -13,3 +13,18 @@ export type topSetType = {
     status: boolean;
     supplierName: string;
 };
+
+export type supplierDataType = {
+    avg: number;
+    id: number;
+    name: string;
+    num: number;
+};
+
+export type likedSetType = {
+    id: number;
+    name: string;
+    num: number;
+    status: boolean;
+    supplierName: string;
+};

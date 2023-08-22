@@ -17,8 +17,8 @@ function init() {
     const data = ref<number[]>([]);
     const label = ref<string[]>([]);
     props.data.forEach((value) => {
-        label.value.unshift(value.name);
-        data.value.unshift(value.num);
+        label.value.push(value.name);
+        data.value.push(value.num);
     });
     const option = {
         backgroundColor: '#38445E',
@@ -37,6 +37,24 @@ function init() {
             },
             left: 'center',
             top: '15px',
+        },
+        tooltip: {
+            trigger: "axis",
+            axisPointer: {
+                type: "shadow",
+            },
+            formatter: (params: any) => {
+                let i :any = 0
+                for ( i in props.data) {
+                    if (props.data[i].name === params[0].axisValueLabel){
+                        break
+                    }
+                }
+                let str = ''
+                str += `<div>${props.data[i].name} - ${props.data[i].supplierName} : ${props.data[i].num}次</div>`
+                
+                return str
+            }
         },
         xAxis: {
             data: label.value,

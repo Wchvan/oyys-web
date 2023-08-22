@@ -21,7 +21,10 @@ const getReviews = async (params: getReviewsParm) => {
 
 /* 删除评论 */
 const delReviews = async (params: delReviewsParm) => {
-    const res = (await del('/comment/deleteComment', params)) as delReviewsResp;
+    const res = (await post(
+        '/comment/deleteComment',
+        params,
+    )) as delReviewsResp;
     return res;
 };
 

@@ -40,6 +40,24 @@ function init() {
             left: 'center',
             top: '15px',
         },
+        tooltip: {
+            trigger: "axis",
+            axisPointer: {
+                type: "shadow",
+            },
+            formatter: (params: any) => {
+                let i :any = 0
+                for ( i in props.data) {
+                    if (props.data[i].name === params[0].data.name){
+                        break
+                    }
+                }
+                let str = ''
+                str += `<div>${props.data[i].name} - ${props.data[i].supplierName} : ${props.data[i].star}分</div>`
+                
+                return str
+            }
+        },
         xAxis: {
             max: total,
             splitLine: {
