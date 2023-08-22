@@ -41,7 +41,7 @@ function init() {
             formatter: (params: any) => {
                 let i: any = 0;
                 for (i in props.data) {
-                    if (props.data[i].name === params[0].data.name) {
+                    if (props.data[i].name === params[0].axisValueLabel) {
                         break;
                     }
                 }
