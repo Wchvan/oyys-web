@@ -91,7 +91,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { activeProviderType, providerType } from '@/interface/provider/index';
+import type {
+    activeProviderType,
+    providerType,
+} from '@/interface/provider/index';
 import useProviderStore from '@/store/provider/provider';
 import { getActiveProvidersParm } from '@/interface/provider/api';
 import providerDialog from './provider-dialog.vue';
@@ -138,7 +141,7 @@ const tableLabels = ref<Partial<Record<keyof activeProviderType, string>>>({
     name: '供应商名称',
     score: '分数',
     num: '五星次数',
-    avg: '平均分'
+    avg: '平均分',
 });
 
 getProviders(searchForm.value);
