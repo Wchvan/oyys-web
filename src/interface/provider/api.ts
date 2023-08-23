@@ -39,7 +39,10 @@ export type getActiveProvidersResp = apiRes<{
         manager: string;
         name: string;
         phone: string;
+        score: string;
         status: boolean;
+        avg: number;
+        num: number;
     }[];
 }>;
 

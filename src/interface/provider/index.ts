@@ -7,6 +7,18 @@ export type providerType = {
     status: boolean;
 };
 
+export type activeProviderType = {
+    address: string;
+    id: number;
+    manager: string;
+    name: string;
+    phone: string;
+    score: string;
+    status: boolean;
+    avg: number;
+    num: number;
+};
+
 export type comboType = {
     description: string;
     flavor: string;

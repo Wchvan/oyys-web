@@ -91,9 +91,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { providerType } from '@/interface/provider/index';
+import type { activeProviderType, providerType } from '@/interface/provider/index';
 import useProviderStore from '@/store/provider/provider';
-import { getProvidersParm } from '@/interface/provider/api';
+import { getActiveProvidersParm } from '@/interface/provider/api';
 import providerDialog from './provider-dialog.vue';
 import ProviderService from '@/api/provider/provider';
 
@@ -104,7 +104,7 @@ const emit = defineEmits<{
 const providerStore = useProviderStore();
 const total = ref<number>(0);
 
-const searchForm = ref<getProvidersParm>({
+const searchForm = ref<getActiveProvidersParm>({
     address: '',
     manager: '',
     name: '',
@@ -124,18 +124,21 @@ const handleClick = (index: number) => {
 };
 
 /* 表格数据相关 */
-const tableData = ref<providerType[]>([]);
+const tableData = ref<activeProviderType[]>([]);
 
-const getProviders = (params: getProvidersParm) => {
+const getProviders = (params: getActiveProvidersParm) => {
     ProviderService.getActiveProviders(params).then((res) => {
         tableData.value = res.data.supplierList;
         total.value = res.data.total;
     });
 };
 
-const tableLabels = ref<Partial<Record<keyof providerType, string>>>({
+const tableLabels = ref<Partial<Record<keyof activeProviderType, string>>>({
     id: '序号',
     name: '供应商名称',
+    score: '分数',
+    num: '五星次数',
+    avg: '平均分'
 });
 
 getProviders(searchForm.value);
