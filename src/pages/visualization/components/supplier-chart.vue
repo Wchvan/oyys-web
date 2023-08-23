@@ -19,7 +19,7 @@ function init() {
     props.data.forEach((item) => {
         label.value.push(item.name);
         data.value.push(
-            Math.round(((item.num / top) * 40 + (item.avg / 5) * 60) * 10) / 10
+            Math.round(((item.num / top) * 40 + (item.avg / 5) * 60) * 10) / 10,
         );
     });
 
