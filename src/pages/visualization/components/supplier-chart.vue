@@ -54,7 +54,11 @@ function init() {
                     }
                 }
                 let str = '';
-                str += `<div>${props.data[i].name} - 总分：${params[0].value}</div> ${props.data[i].num}次五星 - 平均分: ${Math.round(props.data[i].avg * 10) / 10}`;
+                str += `<div>${props.data[i].name} - 总分：${
+                    params[0].value
+                }</div> ${props.data[i].num}次五星 - 平均分: ${
+                    Math.round(props.data[i].avg * 10) / 10
+                }`;
 
                 return str;
             },
