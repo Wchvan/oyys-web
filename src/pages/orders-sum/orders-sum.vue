@@ -42,6 +42,7 @@
                     layout="prev, pager, next"
                     :total="total"
                     class="center-x w-fit mt-2"
+                    :page-size="pageSize"
                     :current-page="page"
                     @current-change="handlePageChange"
                 />

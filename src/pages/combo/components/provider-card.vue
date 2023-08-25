@@ -64,6 +64,7 @@
                 layout="prev, pager, next"
                 :total="total"
                 class="center-x w-fit mt-2"
+                :page-size="searchForm.pageSize"
                 :current-page="searchForm.page"
                 @current-change="handlePageChange"
             />

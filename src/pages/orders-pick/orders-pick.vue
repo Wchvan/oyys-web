@@ -47,6 +47,7 @@
                     background
                     layout="prev, pager, next"
                     :total="total"
+                    :page-size="searchForm.pageSize"
                     class="center-x w-fit mt-2"
                     :current-page="searchForm.page"
                     @current-change="handlePageChange"

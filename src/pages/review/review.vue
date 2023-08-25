@@ -91,6 +91,7 @@
                         :total="total"
                         class="center-x w-fit mt-2"
                         :current-page="searchForm.page"
+                        :page-size="searchForm.pageSize"        
                         @current-change="handlePageChange"
                     />
                     <div class="absolute right-8 w-fit top-5 mr-2">
