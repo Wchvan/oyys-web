@@ -26,6 +26,7 @@ export type getSupplierChartResp = apiRes<{
         id: number;
         name: string;
         num: number;
+        score: number;
     }[];
 }>;
 

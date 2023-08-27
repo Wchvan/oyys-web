@@ -19,6 +19,7 @@ export type supplierDataType = {
     id: number;
     name: string;
     num: number;
+    score: number;
 };
 
 export type likedSetType = {
